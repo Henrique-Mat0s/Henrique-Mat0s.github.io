@@ -99,7 +99,8 @@ nav a:hover{opacity:1;background:rgba(255,255,255,.06)}
 
 /* lado visual do hero: a foto quando existir; sem foto, o terminal */
 .visual{position:relative;min-width:0}
-.visual .foto{display:none;width:100%;max-width:420px;aspect-ratio:4/5;object-fit:cover;border-radius:16px;border:1px solid var(--rule);margin:0 auto}
+.visual .foto{display:none;width:auto;max-width:100%;max-height:620px;height:auto;border-radius:16px;border:1px solid var(--rule);margin:0 auto;box-shadow:0 30px 60px rgba(0,0,0,.45)}
+@media (max-width:900px){.visual .foto{max-height:520px}}
 .visual.tem-foto .foto{display:block}
 .visual.tem-foto .term{display:none}
 .term{background:#0c1014;border:1px solid var(--rule);border-radius:12px;overflow:hidden;box-shadow:0 30px 60px rgba(0,0,0,.45);font-family:var(--mono);font-size:13.5px;line-height:1.7}
@@ -449,7 +450,7 @@ footer a{color:var(--ink-2)}
 
     <div class="visual" id="visual">
       <!-- A foto entra aqui quando o arquivo foto.jpg existir na raiz do repositório. -->
-      <img class="foto" src="foto.jpg" alt="Henrique Matos" width="420" height="525" id="foto">
+      <img class="foto" src="foto.jpg" alt="Henrique Matos" width="992" height="1586" id="foto">
       <figure class="term" style="margin:0" aria-label="Exemplo de uma automação em execução">
         <div class="bar" aria-hidden="true"><i></i><i></i><i></i><span>automacao · log</span></div>
 <pre aria-hidden="true"><span class="c">$</span> <span class="k">n8n</span> webhook <span class="y">proposta.assinada</span>
