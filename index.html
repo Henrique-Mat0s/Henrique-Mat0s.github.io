@@ -157,6 +157,29 @@ nav a:hover{opacity:1;text-decoration:underline}
 .proj .links a{display:inline-block;margin-right:18px;font-size:15px}
 .stack{font-family:var(--mono);font-size:13px;color:var(--ink-2)}
 
+/* na pratica: o que ja fiz */
+.pratica{margin-top:56px}
+.pratica h3{font-size:21px;font-weight:600;letter-spacing:-.01em;margin:0 0 6px}
+.pratica .sub{margin-bottom:24px}
+.feitos{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin:0;padding:0;list-style:none}
+@media (max-width:900px){.feitos{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.feitos{grid-template-columns:1fr}}
+.feito{background:var(--bg-2);border:1px solid var(--rule);border-radius:10px;overflow:hidden;display:flex;flex-direction:column}
+.feito .fig{aspect-ratio:4/3;background:#0d1115;display:block;overflow:hidden}
+.feito .fig img,.feito .fig svg{width:100%;height:100%;display:block;object-fit:cover}
+.feito .fig.alto img{object-fit:contain}
+.feito .txt{padding:14px 16px 16px}
+.feito .onde{font-family:var(--mono);font-size:12px;color:var(--gold);display:block;margin-bottom:6px}
+.feito h4{margin:0 0 6px;font-size:17px;font-weight:600}
+.feito p{margin:0;color:var(--ink-2);font-size:15px}
+.nota-img{font-size:13px;color:var(--ink-2);margin:14px 0 0}
+
+/* imagem do projeto */
+.proj .shot{display:block;margin:16px 0 0;max-width:620px;border:1px solid var(--rule);border-radius:8px;overflow:hidden;background:#0d1115}
+.proj .shot img{display:block;width:100%;height:auto}
+.creditos{font-size:13px;color:var(--ink-2);margin:0 0 20px;max-width:none}
+.creditos a{color:var(--ink-2)}
+
 /* habilidades e contato */
 .cols{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
 @media (max-width:800px){.cols{grid-template-columns:1fr}}
@@ -165,6 +188,7 @@ nav a:hover{opacity:1;text-decoration:underline}
 .tags li{font-size:14px;padding:5px 10px;border:1px solid var(--rule);border-radius:4px;background:var(--bg-2)}
 footer{padding:36px 0 56px;color:var(--ink-2);font-size:14px;border-top:1px solid var(--rule)}
 footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer .wrap.creditos{display:block}
 footer a{color:var(--ink-2)}
 </style>
 </head>
@@ -198,7 +222,7 @@ footer a{color:var(--ink-2)}
 <section class="block" id="hardware">
   <div class="wrap">
     <h2>Hardware</h2>
-    <p class="sub">Passe o mouse sobre o computador ou o celular para ver as peças se separarem. Toque ou passe o mouse em uma peça para ler o que ela faz e a minha experiência com ela. No celular, use o botão.</p>
+    <p class="sub">Passe o mouse sobre o computador ou o celular para ver as peças se separarem. Toque ou passe o mouse em uma peça para ler o que ela faz e, nas peças em que já mexi, a minha experiência. No celular, use o botão.</p>
 
     <div class="bancada">
       <!-- ===== PC ===== -->
@@ -248,6 +272,37 @@ footer a{color:var(--ink-2)}
         <div class="info" id="info-cel" aria-live="polite"><p class="vazio">Escolha uma peça para ler sobre ela.</p></div>
       </div>
     </div>
+    <div class="pratica" id="pratica">
+      <h3>Na prática</h3>
+      <p class="sub">O que eu já fiz com as próprias mãos, em celulares e computadores.</p>
+      <ul class="feitos">
+        <li class="feito"><span class="fig alto"><img src="img/galaxy-a17.jpg" alt="Samsung Galaxy A17" loading="lazy" width="700" height="933"></span><div class="txt"><span class="onde">Celular</span><h4>Troca de tela: Galaxy A17</h4><p>Substituí a tela de um Samsung Galaxy A17.</p></div></li>
+        <li class="feito"><span class="fig alto"><img src="img/moto-g35.jpg" alt="Motorola Moto G35" loading="lazy" width="700" height="1244"></span><div class="txt"><span class="onde">Celular</span><h4>Tela e bateria: Moto G35</h4><p>No Moto G35 já fiz a troca de tela e a troca de bateria.</p></div></li>
+        <li class="feito"><span class="fig"><img src="img/ddr5.jpg" alt="Módulo de memória DDR5 de computador de mesa" loading="lazy" width="900" height="503"></span><div class="txt"><span class="onde">No trabalho</span><h4>Memória DDR5</h4><p>Instalei um módulo de memória DDR5 no computador do setor de marketing de uma empresa em que trabalhei.</p></div></li>
+        <li class="feito"><span class="fig"><svg viewBox="0 0 400 300" role="img" aria-label="Ilustração de uma placa de vídeo de dois processadores gráficos" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="300" fill="#0d1115"/>
+  <rect x="34" y="92" width="14" height="120" rx="2" fill="#aeb6be"/>
+  <rect x="38" y="104" width="6" height="22" fill="#262c33"/><rect x="38" y="134" width="6" height="22" fill="#262c33"/>
+  <rect x="48" y="100" width="320" height="104" rx="6" fill="#16191d" stroke="#3a434d"/>
+  <rect x="56" y="106" width="304" height="86" rx="8" fill="#8f1d22"/>
+  <rect x="56" y="106" width="304" height="20" rx="8" fill="#a8262c"/>
+  <g fill="none" stroke="#16191d" stroke-width="6"><circle cx="128" cy="150" r="32"/><circle cx="288" cy="150" r="32"/></g>
+  <g fill="#23272d"><circle cx="128" cy="150" r="29"/><circle cx="288" cy="150" r="29"/></g>
+  <g stroke="#4a535d" stroke-width="5" stroke-linecap="round">
+    <path d="M128 150l0-25M128 150l22 12M128 150l-22 12M128 150l18-18M128 150l-18-18M128 150l0 25"/>
+    <path d="M288 150l0-25M288 150l22 12M288 150l-22 12M288 150l18-18M288 150l-18-18M288 150l0 25"/>
+  </g>
+  <g fill="#8d97a3"><circle cx="128" cy="150" r="7"/><circle cx="288" cy="150" r="7"/></g>
+  <rect x="186" y="134" width="44" height="32" rx="3" fill="#6f1519"/>
+  <rect x="96" y="204" width="150" height="12" fill="#d9a94b"/>
+  <g fill="#0d1115"><rect x="120" y="204" width="3" height="12"/><rect x="150" y="204" width="3" height="12"/><rect x="180" y="204" width="3" height="12"/><rect x="210" y="204" width="3" height="12"/></g>
+  <rect x="318" y="88" width="20" height="12" fill="#262c33"/><rect x="342" y="88" width="16" height="12" fill="#262c33"/>
+</svg></span><div class="txt"><span class="onde">Meu computador</span><h4>Placa de vídeo ATI Radeon HD 3870 X2</h4><p>Montei meu próprio computador, com uma ATI Radeon HD 3870 X2 como placa de vídeo.</p></div></li>
+        <li class="feito"><span class="fig"><img src="img/ddr3.jpg" alt="Módulos de memória DDR3 de computador de mesa" loading="lazy" width="900" height="766"></span><div class="txt"><span class="onde">Meu computador</span><h4>15 GB de memória DDR3</h4><p>O computador que montei usa 15 GB de memória RAM DDR3.</p></div></li>
+        <li class="feito"><span class="fig"><img src="img/hd.jpg" alt="Disco rígido de 3,5 polegadas" loading="lazy" width="800" height="800"></span><div class="txt"><span class="onde">Meu computador</span><h4>Disco rígido de 850 GB</h4><p>O armazenamento do computador que montei é um disco rígido de 850 GB.</p></div></li>
+      </ul>
+      <p class="nota-img">As fotos são ilustrativas dos modelos, não dos meus aparelhos; a placa de vídeo é um desenho. Créditos no rodapé.</p>
+    </div>
   </div>
 </section>
 
@@ -268,7 +323,7 @@ footer a{color:var(--ink-2)}
       <div>
         <h3>Hardware e suporte</h3>
         <ul class="tags">
-          <li>Montagem de PC</li><li>Troca de peças</li><li>Limpeza e pasta térmica</li><li>Formatação e instalação do Windows</li><li>Drivers e BIOS</li><li>Diagnóstico de falhas</li><li>Troca de tela e bateria de celular</li><li>Redes básicas e Wi-Fi</li><li>Impressoras</li>
+          <li>Montagem de PC</li><li>Instalação de memória RAM</li><li>Instalação de placa de vídeo</li><li>Instalação de disco rígido</li><li>Troca de tela de celular</li><li>Troca de bateria de celular</li><li>Ambiente Windows da equipe</li>
         </ul>
       </div>
       <div>
@@ -297,6 +352,7 @@ footer a{color:var(--ink-2)}
 </section>
 
 <footer>
+  <div class="wrap creditos">Fotos de hardware do Wikimedia Commons, redimensionadas: <a href="https://commons.wikimedia.org/wiki/File:Samsung_Galaxy_A17_5G_2026.jpg">Galaxy A17</a>, de Captainmorlypogi1959 (<a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>); <a href="https://commons.wikimedia.org/wiki/File:Motorola_Moto_G35_5G.jpg">Moto G35</a>, de Savantup (<a href="https://creativecommons.org/publicdomain/zero/1.0/deed.en">CC0</a>); <a href="https://commons.wikimedia.org/wiki/File:SK_hynix_16GB_DDR5-5600_UDIMM_HMCG78AGBUA084N_BA.jpg">memória DDR5</a>, de ITEagle Europe - Sebastiaan Broekhoven (<a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>); <a href="https://commons.wikimedia.org/wiki/File:Assorted_DDR3_desktop_memory_modules_(Crucial_Ballistix,_Crucial,_Lenovo_and_Ramaxel).jpg">memórias DDR3</a>, de ITEagle Europe - Sebastiaan Broekhoven (<a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>); <a href="https://commons.wikimedia.org/wiki/File:Seagate_BarraCuda_Compute_2TB_3.5-inch_SATA_HDD_-_top_view.jpg">disco rígido</a>, de ITEagle Europe - Sebastiaan Broekhoven (<a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>).</div>
   <div class="wrap">
     <span>Henrique Matos · 2026</span>
     <span>Site feito à mão, hospedado no <a href="https://github.com/Henrique-Mat0s/Henrique-Mat0s.github.io">GitHub Pages</a>.</span>
@@ -308,6 +364,7 @@ footer a{color:var(--ink-2)}
 // Para publicar o link de um projeto, preencha "links" com um ou mais itens:
 //   links:[{rotulo:"Código", url:"https://github.com/Henrique-Mat0s/NOME"}, {rotulo:"Abrir demonstração", url:"https://..."}]
 // Com "links" vazio o projeto aparece como "em publicação". "privado:true" marca código que não será aberto.
+// Imagem do projeto (opcional): img:{src:"img/arquivo.png", alt:"o que a tela mostra"}
 const PROJETOS = [
   {ano:"2026", tipo:"Sistema web", titulo:"Central RH: plataforma inteligente de recrutamento",
    resumo:"Centraliza o recrutamento do recebimento do currículo à lista ordenada por vaga. Um bot lê a caixa de e-mail por IMAP, filtra por palavras-chave e recolhe os anexos; os currículos também chegam por um grupo de WhatsApp ou por upload. A IA extrai escolaridade, experiências, área e competências, e classifica os candidatos de cada vaga com nota, pontos fortes e lacunas.",
@@ -329,6 +386,7 @@ const PROJETOS = [
    resumo:"Ponto de venda para pequeno mercado que roda inteiro no navegador, sem servidor e sem instalação. Lê código de barras pela câmera do celular, controla o estoque e fecha vendas, guardando tudo no próprio aparelho.",
    pontos:["Começou como um cadastro e contagem de produtos (Estoque) e evoluiu para o ponto de venda completo (PDV)."],
    stack:"HTML · CSS · JavaScript · localStorage · ZXing",
+   img:{src:"img/proj-mercado.png", alt:"Tela de venda do PDV, com busca de produto, pedido e formas de pagamento"},
    links:[{rotulo:"Abrir o PDV", url:"https://henrique-mat0s.github.io/pdv-mercado/"},
           {rotulo:"Código do PDV", url:"https://github.com/Henrique-Mat0s/pdv-mercado"},
           {rotulo:"Código do Estoque", url:"https://github.com/Henrique-Mat0s/estoque-mercado"}]},
@@ -372,35 +430,36 @@ document.getElementById("lista-projetos").innerHTML = PROJETOS.map(p => {
   const pontos = p.pontos.length ? "<ul>" + p.pontos.map(t => "<li>" + t + "</li>").join("") + "</ul>" : "";
   const links = p.links.length
     ? '<p class="links">' + p.links.map(l => '<a href="' + l.url + '">' + l.rotulo + "</a>").join("") + "</p>" : "";
+  const shot = p.img ? '<span class="shot"><img src="' + p.img.src + '" alt="' + p.img.alt + '" loading="lazy"></span>' : "";
   return '<article class="proj"><div class="meta"><b>' + p.ano + "</b>" + p.tipo + tag + "</div><div><h3>" + p.titulo +
-         "</h3><p>" + p.resumo + "</p>" + pontos + '<div class="stack">' + p.stack + "</div>" + links + "</div></article>";
+         "</h3><p>" + p.resumo + "</p>" + pontos + '<div class="stack">' + p.stack + "</div>" + links + shot + "</div></article>";
 }).join("");
 
-// ===== Textos das peças. Edite aqui: "oque" é a função da peça, "exp" é a sua experiência. =====
+// ===== Textos das peças. "oque" é a função da peça; "exp" (opcional) é a sua experiência real com ela. =====
 const PECAS = {
-  gabinete:{nome:"Gabinete",oque:"A caixa que segura e protege tudo. Define o fluxo de ar e quais tamanhos de placa-mãe e fonte cabem.",exp:"Monto o computador do zero: parafuso a placa-mãe nos espaçadores, passo os cabos por trás da bandeja e deixo o interior organizado para o ar circular."},
-  placa:{nome:"Placa-mãe",oque:"Conecta todas as peças. Nela vão o processador, as memórias, a placa de vídeo e os armazenamentos; o chipset e a BIOS moram aqui.",exp:"Identifico o soquete e o tipo de memória compatível, atualizo a BIOS, configuro ordem de boot e resolvo problemas de placa que não dá vídeo."},
-  cpu:{nome:"Processador",oque:"Executa as instruções dos programas. Soquete, número de núcleos e frequência definem com que placa e para que uso ele serve.",exp:"Instalo o processador alinhando o pino de referência, aplico pasta térmica na quantidade certa e acompanho a temperatura depois para ver se o resfriamento está bom."},
-  cooler:{nome:"Cooler do processador",oque:"Dissipador com ventoinha que tira o calor do processador. Sem ele o PC desliga em segundos por superaquecimento.",exp:"Faço a limpeza periódica, troco a pasta térmica e substituo o cooler original por um maior quando o computador está esquentando ou fazendo barulho."},
-  ram:{nome:"Memória RAM",oque:"Memória de trabalho: guarda o que está em uso agora. Mais RAM e em dual channel deixam o sistema mais ágil com várias coisas abertas.",exp:"Faço upgrade de memória respeitando o tipo (DDR4, DDR5) e os slots certos para dual channel. É a primeira coisa que testo quando o PC trava ou dá tela azul."},
-  gpu:{nome:"Placa de vídeo",oque:"Processa imagem e vídeo. Essencial para jogos, edição e várias telas; em escritório, muitas vezes o vídeo integrado do processador basta.",exp:"Instalo e troco placas de vídeo, confiro se a fonte tem potência e conectores suficientes e instalo os drivers corretos do fabricante."},
-  ssd:{nome:"SSD NVMe",oque:"Armazenamento rápido ligado direto na placa-mãe. Onde o Windows deve ficar para ligar em segundos.",exp:"Migro o Windows do HD para o SSD, instalo o sistema do zero quando precisa e configuro o SSD como disco de boot."},
-  hd:{nome:"Disco rígido",oque:"Armazenamento mecânico, mais barato por gigabyte. Bom para guardar arquivos grandes e cópias de segurança.",exp:"Uso o HD como disco secundário de dados e backup, verifico a saúde com ferramentas de S.M.A.R.T. e recupero arquivos antes de trocar um disco que começou a falhar."},
-  fonte:{nome:"Fonte de alimentação",oque:"Transforma a energia da tomada nas tensões que as peças usam. Uma fonte fraca ou ruim causa desligamentos e pode queimar componentes.",exp:"Dimensiono a potência de acordo com as peças, confiro a certificação e os conectores, e é o primeiro suspeito quando o PC não liga ou reinicia sozinho."},
-  fan:{nome:"Ventoinhas do gabinete",oque:"Puxam ar frio pela frente e empurram ar quente para fora atrás e em cima. O fluxo bem feito abaixa a temperatura de tudo.",exp:"Posiciono as ventoinhas no sentido certo de entrada e saída, ligo nos conectores da placa-mãe e ajusto a rotação para equilibrar ruído e temperatura."},
-  tampa:{nome:"Tampa traseira",oque:"Fecha o aparelho e protege a parte interna. Em muitos modelos é colada, e abrir exige calor e cuidado.",exp:"Abro a tampa com aquecimento controlado e espátulas plásticas, sem trincar o vidro, e recoloco adesivo novo no fechamento."},
-  bateria:{nome:"Bateria",oque:"Fonte de energia do aparelho. Com o tempo perde capacidade e pode inchar, empurrando a tela.",exp:"Troco baterias desgastadas, desconecto o cabo da bateria antes de qualquer outro reparo e descarto a antiga em ponto de coleta."},
-  logica:{nome:"Placa lógica",oque:"O coração do celular: processador, memória e armazenamento soldados em uma só placa, com os conectores de todos os outros módulos.",exp:"Desconecto e reconecto os cabos flat com segurança, limpo contatos oxidados e identifico quando o defeito é na placa e o conserto não compensa."},
-  camera:{nome:"Módulo de câmeras",oque:"Conjunto de lentes e sensores, ligado à placa por um cabo flat. Pode ser trocado separadamente da placa.",exp:"Troco módulos de câmera com imagem embaçada ou que não abrem, e limpo a lente por dentro quando entra poeira."},
-  falante:{nome:"Alto-falante",oque:"Reproduz som de chamadas e mídia. Perde volume quando entra sujeira ou água na grade.",exp:"Faço limpeza da grade e troco o alto-falante quando o som fica abafado ou chiando."},
-  usb:{nome:"Conector de carga",oque:"Porta USB-C ou micro-USB por onde o aparelho carrega e troca dados. É uma das peças que mais dão defeito pelo uso diário.",exp:"Troco o conector ou a placa de carga quando o celular só carrega em uma posição do cabo ou não reconhece o carregador."},
-  tela:{nome:"Tela",oque:"Painel LCD ou OLED com o vidro de toque, ligado à placa por cabos flat. O reparo mais comum em celulares.",exp:"Substituo telas quebradas, testo o toque e as cores antes de fechar o aparelho e recoloco a vedação."}
+  gabinete:{nome:"Gabinete",oque:"A caixa que segura e protege tudo. Define o fluxo de ar e quais tamanhos de placa-mãe e fonte cabem.",exp:"Montei meu próprio computador de mesa."},
+  placa:{nome:"Placa-mãe",oque:"Conecta todas as peças. Nela vão o processador, as memórias, a placa de vídeo e os armazenamentos; o chipset e a BIOS moram aqui."},
+  cpu:{nome:"Processador",oque:"Executa as instruções dos programas. Soquete, número de núcleos e frequência definem com que placa e para que uso ele serve."},
+  cooler:{nome:"Cooler do processador",oque:"Dissipador com ventoinha que tira o calor do processador. Sem ele o PC desliga em segundos por superaquecimento."},
+  ram:{nome:"Memória RAM",oque:"Memória de trabalho: guarda o que está em uso agora. Mais RAM e em dual channel deixam o sistema mais ágil com várias coisas abertas.",exp:"Instalei memória DDR5 no computador do setor de marketing de uma empresa em que trabalhei. No computador que montei, uso 15 GB de DDR3."},
+  gpu:{nome:"Placa de vídeo",oque:"Processa imagem e vídeo. Essencial para jogos, edição e várias telas; em escritório, muitas vezes o vídeo integrado do processador basta.",exp:"No computador que montei, instalei uma ATI Radeon HD 3870 X2."},
+  ssd:{nome:"SSD NVMe",oque:"Armazenamento rápido ligado direto na placa-mãe. Onde o Windows deve ficar para ligar em segundos."},
+  hd:{nome:"Disco rígido",oque:"Armazenamento mecânico, mais barato por gigabyte. Bom para guardar arquivos grandes e cópias de segurança.",exp:"O computador que montei usa um disco rígido de 850 GB."},
+  fonte:{nome:"Fonte de alimentação",oque:"Transforma a energia da tomada nas tensões que as peças usam. Uma fonte fraca ou ruim causa desligamentos e pode queimar componentes."},
+  fan:{nome:"Ventoinhas do gabinete",oque:"Puxam ar frio pela frente e empurram ar quente para fora atrás e em cima. O fluxo bem feito abaixa a temperatura de tudo."},
+  tampa:{nome:"Tampa traseira",oque:"Fecha o aparelho e protege a parte interna. Em muitos modelos é colada, e abrir exige calor e cuidado."},
+  bateria:{nome:"Bateria",oque:"Fonte de energia do aparelho. Com o tempo perde capacidade e pode inchar, empurrando a tela.",exp:"Troquei a bateria de um Moto G35."},
+  logica:{nome:"Placa lógica",oque:"O coração do celular: processador, memória e armazenamento soldados em uma só placa, com os conectores de todos os outros módulos."},
+  camera:{nome:"Módulo de câmeras",oque:"Conjunto de lentes e sensores, ligado à placa por um cabo flat. Pode ser trocado separadamente da placa."},
+  falante:{nome:"Alto-falante",oque:"Reproduz som de chamadas e mídia. Perde volume quando entra sujeira ou água na grade."},
+  usb:{nome:"Conector de carga",oque:"Porta USB-C ou micro-USB por onde o aparelho carrega e troca dados. É uma das peças que mais dão defeito pelo uso diário."},
+  tela:{nome:"Tela",oque:"Painel LCD ou OLED com o vidro de toque, ligado à placa por cabos flat. O reparo mais comum em celulares.",exp:"Troquei a tela de um Samsung Galaxy A17 e a de um Moto G35."}
 };
 
 function mostrar(bench, k){
   const info = document.getElementById(bench === "bench-pc" ? "info-pc" : "info-cel");
   const p = PECAS[k]; if(!p) return;
-  info.innerHTML = "<h4>"+p.nome+"</h4><p><b>O que faz.</b> "+p.oque+"</p><p><b>Minha experiência.</b> "+p.exp+"</p>";
+  info.innerHTML = "<h4>"+p.nome+"</h4><p><b>O que faz.</b> "+p.oque+"</p>"+(p.exp ? "<p><b>Minha experiência.</b> "+p.exp+"</p>" : "");
   document.querySelectorAll("#"+bench+" .part").forEach(b => b.classList.toggle("ativa", b.dataset.k === k));
 }
 
