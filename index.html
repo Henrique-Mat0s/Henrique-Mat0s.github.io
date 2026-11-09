@@ -3,101 +3,273 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Henrique Matos</title>
-<meta name="description" content="Portfólio de Henrique Matos: sistemas web, automação, suporte de TI e manutenção de hardware.">
+<title>Henrique Matos · Automação com IA</title>
+<meta name="description" content="Portfólio de Henrique Matos: automação de processos com IA, agentes (Claude Code e Hermes Agent), integrações com n8n e APIs, sistemas web e bots.">
+<meta name="theme-color" content="#101418">
+<!-- Compartilhamento (WhatsApp, LinkedIn). AJUSTE: crie img/og.png com 1200x630 px. -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Henrique Matos · Automação com IA">
+<meta property="og:description" content="Automação de processos com IA, agentes, integrações e sistemas web. Veja os projetos.">
+<meta property="og:url" content="https://henrique-mat0s.github.io/">
+<meta property="og:image" content="https://henrique-mat0s.github.io/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23101418'/%3E%3Cpath d='M18 44V20h6v9h16v-9h6v24h-6V35H24v9z' fill='%237FB3E8'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
+/* =========================================================
+   Base. Três pilares: clareza (texto curto, um assunto por
+   bloco), hierarquia (um h1, h2 por seção, h3 por item) e
+   acessibilidade (contraste, foco visível, teclado, movimento
+   reduzido, HTML semântico).
+   ========================================================= */
 :root{
   --bg:#101418;
   --bg-2:#171c22;
   --panel:#1d242c;
   --ink:#EEF1F4;
-  --ink-2:#A6B0BB;
+  --ink-2:#AEB8C3;      /* contraste 8:1 sobre --bg */
   --rule:#2b333d;
   --steel:#7FB3E8;
   --steel-deep:#2F6FBA;
   --gold:#D9A94B;
+  --green:#3DBB6F;
   --pcb:#1F5C3C;
   --pcb-2:#2A7A4F;
-  --metal:#8D97A3;
-  --metal-2:#C3CAD2;
-  --dark:#262c33;
   --sans:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
   --mono:'IBM Plex Mono',ui-monospace,Consolas,monospace;
+  --r:10px;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+html{background:var(--bg)}
+body{margin:0;background:transparent;color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
 a{color:var(--steel);text-decoration-thickness:1px;text-underline-offset:3px}
-a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:4px}
 .wrap{max-width:1120px;margin:0 auto;padding:0 20px}
-h2{font-size:clamp(24px,3vw,30px);letter-spacing:-.015em;font-weight:600;margin:0 0 8px}
-.sub{color:var(--ink-2);margin:0 0 32px;max-width:62ch}
-section.block{padding:72px 0;border-top:1px solid var(--rule)}
+h1,h2,h3,h4{margin:0;font-weight:600;letter-spacing:-.015em}
+h2{font-size:clamp(26px,3vw,32px)}
+h3{font-size:21px;letter-spacing:-.01em}
+.sub{color:var(--ink-2);margin:8px 0 32px;max-width:62ch}
+section.block{padding:80px 0;border-top:1px solid var(--rule);scroll-margin-top:72px}
+.eyebrow{font-family:var(--mono);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:10px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
-/* topo */
-.top{position:absolute;top:0;left:0;right:0;z-index:5}
-.top .wrap{display:flex;justify-content:space-between;align-items:center;min-height:64px;gap:16px;flex-wrap:wrap}
+/* pular para o conteúdo (teclado e leitores de tela) */
+.skip{position:absolute;left:16px;top:-60px;background:var(--gold);color:#101418;padding:10px 14px;border-radius:6px;font-weight:600;z-index:50;text-decoration:none}
+.skip:focus{top:16px}
+
+/* ===== topo ===== */
+.top{position:sticky;top:0;z-index:20;background:rgba(16,20,24,.88);backdrop-filter:blur(8px);border-bottom:1px solid transparent}
+.top.scrolled{border-bottom-color:var(--rule)}
+.top .wrap{display:flex;justify-content:space-between;align-items:center;min-height:64px;gap:16px}
 .brand{font-weight:600;color:#fff;text-decoration:none}
-nav a{color:#fff;opacity:.85;text-decoration:none;margin-left:22px;font-size:15px}
-nav a:hover{opacity:1;text-decoration:underline}
+nav ul{display:flex;gap:4px;margin:0;padding:0;list-style:none;flex-wrap:wrap;justify-content:flex-end}
+nav a{color:var(--ink);opacity:.85;text-decoration:none;font-size:15px;padding:8px 10px;border-radius:6px;display:inline-block}
+nav a:hover{opacity:1;background:rgba(255,255,255,.06)}
+@media (max-width:640px){
+  .top .wrap{flex-direction:column;align-items:flex-start;gap:0;min-height:0;padding-top:10px;padding-bottom:4px}
+  nav{width:100%;margin-left:-20px;margin-right:-20px;width:calc(100% + 40px)}
+  nav ul{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;padding:0 14px 6px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  nav ul::-webkit-scrollbar{display:none}
+  nav a{padding:8px 8px;font-size:14px;white-space:nowrap}
+  section.block{scroll-margin-top:96px}
+}
 
-/* hero com a foto ao fundo */
-.hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;padding:120px 0 72px;isolation:isolate;overflow:hidden}
-.hero .foto{position:absolute;inset:0;z-index:-2;background:
-  linear-gradient(160deg,#1b2a3a 0%,#0f1418 60%,#1a1611 100%);
-  background-image:url("foto.jpg");background-size:cover;background-position:center 20%;background-repeat:no-repeat}
-.hero .foto::after{content:"";position:absolute;inset:0;background:
-  linear-gradient(to top,rgba(16,20,24,.98) 0%,rgba(16,20,24,.72) 45%,rgba(16,20,24,.25) 100%)}
-.hero .foto.sem-foto{background-image:none;background:
-  radial-gradient(1000px 600px at 75% 25%,#24364b 0%,transparent 60%),
-  linear-gradient(160deg,#1b2a3a 0%,#0f1418 60%,#1a1611 100%)}
-.status{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:14px;color:var(--ink);padding:8px 14px;border:1px solid rgba(255,255,255,.25);border-radius:999px;background:rgba(16,20,24,.55);backdrop-filter:blur(6px)}
-.status::before{content:"";width:9px;height:9px;border-radius:50%;background:#3DBB6F;box-shadow:0 0 0 3px rgba(61,187,111,.25)}
-.hero h1{font-size:clamp(36px,6vw,68px);line-height:1.05;letter-spacing:-.03em;font-weight:600;margin:26px 0 22px;max-width:17ch;color:#fff}
-.hero .wrap{width:100%}
-.hero p.lead{font-size:clamp(17px,2vw,21px);color:#d6dde5;max-width:58ch;margin:0 0 30px}
-.acts{display:flex;gap:14px;flex-wrap:wrap}
-.btn{display:inline-block;padding:12px 18px;border-radius:6px;font-weight:500;text-decoration:none;border:1px solid var(--ink);color:var(--ink)}
+/* ===== hero ===== */
+.hero{position:relative;padding:72px 0 80px;overflow:hidden;isolation:isolate}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;background:
+  radial-gradient(900px 500px at 85% 10%,rgba(47,111,186,.22) 0%,transparent 60%),
+  radial-gradient(700px 400px at 10% 90%,rgba(217,169,75,.10) 0%,transparent 60%)}
+.hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center}
+@media (max-width:900px){.hero .wrap{grid-template-columns:1fr;gap:36px}.hero{padding:48px 0 64px}}
+.status{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:13px;color:var(--ink);padding:8px 14px;border:1px solid rgba(255,255,255,.22);border-radius:999px;background:rgba(23,28,34,.7)}
+.status::before{content:"";flex:none;width:9px;height:9px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px rgba(61,187,111,.25)}
+.hero h1{font-size:clamp(34px,5vw,58px);line-height:1.08;letter-spacing:-.03em;margin:22px 0 20px;max-width:18ch;color:#fff}
+.hero h1 em{font-style:normal;color:var(--steel)}
+.hero p.lead{font-size:clamp(17px,1.6vw,20px);color:#d6dde5;max-width:56ch;margin:0 0 30px}
+.acts{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:7px;font-weight:500;text-decoration:none;border:1px solid var(--ink);color:var(--ink);font-size:16px;line-height:1.2}
 .btn.primary{background:var(--ink);color:var(--bg)}
 .btn.primary:hover{background:#fff}
 .btn.ghost:hover{background:rgba(255,255,255,.08)}
+.btn svg{width:18px;height:18px;flex:none}
 
-/* ===== bancada de hardware ===== */
-.bancada{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:16px}
+/* lado visual do hero: a foto quando existir; sem foto, o terminal */
+.visual{position:relative;min-width:0}
+.visual .foto{display:none;width:100%;max-width:420px;aspect-ratio:4/5;object-fit:cover;border-radius:16px;border:1px solid var(--rule);margin:0 auto}
+.visual.tem-foto .foto{display:block}
+.visual.tem-foto .term{display:none}
+.term{background:#0c1014;border:1px solid var(--rule);border-radius:12px;overflow:hidden;box-shadow:0 30px 60px rgba(0,0,0,.45);font-family:var(--mono);font-size:13.5px;line-height:1.7}
+.term .bar{display:flex;align-items:center;gap:8px;padding:10px 14px;background:#13181e;border-bottom:1px solid var(--rule);color:var(--ink-2);font-size:12px}
+.term .bar i{width:11px;height:11px;border-radius:50%;background:#2b333d;display:inline-block}
+.term .bar span{margin-left:auto}
+.term pre{margin:0;padding:16px 18px;color:#c9d2db;white-space:pre-wrap;word-break:break-word}
+.term .c{color:#8b97a4}.term .k{color:var(--steel)}.term .g{color:var(--green)}.term .y{color:var(--gold)}.term .p{color:#e39cff}
+@media (max-width:900px){.term{font-size:12.5px}}
+
+/* números do topo */
+.nums{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px;max-width:640px}
+@media (max-width:560px){.nums{grid-template-columns:1fr 1fr}}
+.num{border-left:2px solid var(--steel);padding:2px 0 2px 14px}
+.num b{display:block;font-size:26px;letter-spacing:-.02em;font-weight:600;line-height:1.1}
+.num span{color:var(--ink-2);font-size:14px}
+
+/* ===== projetos ===== */
+.destaques{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin:0 0 56px;padding:0;list-style:none}
+@media (max-width:900px){.destaques{grid-template-columns:1fr}}
+.card{background:var(--bg-2);border:1px solid var(--rule);border-radius:var(--r);padding:22px 22px 20px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.card .topo{display:flex;justify-content:space-between;align-items:center;gap:8px 10px;flex-wrap:wrap;font-family:var(--mono);font-size:12.5px;color:var(--ink-2)}
+.card .topo>span:first-child{white-space:nowrap}
+.card h3{font-size:19px}
+.card p{margin:0;color:var(--ink-2);font-size:15.5px}
+.card .stack{margin-top:auto;padding-top:10px}
+.card .links{margin:0}
+.tag{display:inline-block;padding:3px 9px;border-radius:5px;font-size:12.5px;font-family:var(--mono);white-space:nowrap}
+.tag.pub{background:rgba(127,179,232,.15);color:var(--steel)}
+.tag.emp{background:rgba(217,169,75,.16);color:var(--gold)}
+.tag.prep{background:rgba(174,184,195,.14);color:var(--ink-2)}
+.tag.ia{background:rgba(227,156,255,.14);color:#e39cff}
+.stack{font-family:var(--mono);font-size:13px;color:var(--ink-2);line-height:1.7}
+.lista-h{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:8px;flex-wrap:wrap}
+.lista-h h3{font-size:19px}
+.lista-h span{color:var(--ink-2);font-size:14px}
+.proj{display:grid;grid-template-columns:170px 1fr;gap:24px;padding:28px 0;border-top:1px solid var(--rule)}
+.proj:last-of-type{border-bottom:1px solid var(--rule)}
+@media (max-width:640px){.proj{grid-template-columns:1fr;gap:8px}}
+.proj .meta{font-family:var(--mono);font-size:13px;color:var(--ink-2);line-height:1.7}
+.proj .meta b{display:block;color:var(--ink);font-weight:500}
+.proj .meta .tag{margin-top:8px;white-space:normal;line-height:1.4}
+.proj h3{margin:0 0 8px}
+.proj p{margin:0 0 12px;max-width:64ch;color:var(--ink-2)}
+.proj ul{margin:0 0 14px;padding-left:18px;color:var(--ink-2)}
+.proj ul li{margin:4px 0}
+.links{margin:12px 0 0;display:flex;gap:18px;flex-wrap:wrap}
+.links a{font-size:15px}
+.proj .shot{display:block;margin:16px 0 0;max-width:620px;border:1px solid var(--rule);border-radius:8px;overflow:hidden;background:#0d1115}
+.proj .shot img{display:block;width:100%;height:auto}
+.img-falta{padding:18px 16px;font-family:var(--mono);font-size:13px;color:var(--gold);background:#0d1115}
+.galeria{margin-top:16px;max-width:720px}
+.galeria figure.shot{margin:0;max-width:none}
+.galeria figcaption{padding:8px 12px;font-size:13px;color:var(--ink-2);border-top:1px solid var(--rule);background:var(--bg-2)}
+.galeria .thumbs{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.galeria .thumbs button{appearance:none;padding:0;border:2px solid var(--rule);border-radius:6px;background:#0d1115;cursor:pointer;width:104px;overflow:hidden;line-height:0}
+.galeria .thumbs button img{width:100%;height:68px;object-fit:cover;object-position:top;display:block;opacity:.75}
+.galeria .thumbs button:hover img{opacity:1}
+.galeria .thumbs button[aria-pressed="true"]{border-color:var(--steel)}
+.galeria .thumbs button[aria-pressed="true"] img{opacity:1}
+
+/* como trabalho */
+.como{margin-top:40px;background:var(--bg-2);border:1px solid var(--rule);border-radius:var(--r);padding:22px 24px}
+.como h3{font-size:17px;margin-bottom:12px}
+.como ol{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:14px;counter-reset:passo}
+@media (max-width:900px){.como ol{grid-template-columns:1fr}}
+.como li{position:relative;padding:14px 14px 14px 46px;background:var(--panel);border:1px solid var(--rule);border-radius:8px;font-size:15px;color:var(--ink-2)}
+.como li::before{counter-increment:passo;content:counter(passo);position:absolute;left:14px;top:13px;width:22px;height:22px;border-radius:50%;background:var(--steel);color:#101418;font-family:var(--mono);font-size:12px;font-weight:600;display:grid;place-items:center}
+.como li b{color:var(--ink);font-weight:500;display:block;margin-bottom:2px}
+.como p{margin:14px 0 0;color:var(--ink-2);font-size:14.5px;max-width:80ch}
+.como code{font-family:var(--mono);font-size:13px;background:var(--panel);padding:1px 5px;border-radius:4px}
+
+/* ===== agentes: Claude Code e Hermes ===== */
+.agentes{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+@media (max-width:900px){.agentes{grid-template-columns:1fr}}
+@media (max-width:640px){.agente .cab{padding:18px 16px 4px}.cfg{margin:14px 12px 0;font-size:11.5px}.cfg pre{padding:12px 12px}.agente ul{margin:16px 16px 18px}}
+.agente{background:var(--bg-2);border:1px solid var(--rule);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column}
+.agente .cab{padding:22px 24px 6px}
+.agente .cab .eyebrow{margin-bottom:6px}
+.agente .cab p{margin:8px 0 0;color:var(--ink-2);font-size:15.5px;max-width:56ch}
+.cfg{margin:16px 24px 0;background:#0c1014;border:1px solid var(--rule);border-radius:10px;overflow:hidden;font-family:var(--mono);font-size:13px;line-height:1.75}
+.cfg .bar{display:flex;align-items:center;gap:8px;padding:9px 14px;background:#13181e;border-bottom:1px solid var(--rule);color:var(--ink-2);font-size:12px}
+.cfg .bar i{width:10px;height:10px;border-radius:50%;background:#2b333d;display:inline-block}
+.cfg .bar span{margin-left:auto}
+.cfg pre{margin:0;padding:14px 16px;color:#c9d2db;white-space:pre;overflow-x:auto}
+.cfg .c{color:#8b97a4}.cfg .k{color:var(--steel)}.cfg .g{color:var(--green)}.cfg .y{color:var(--gold)}.cfg .p{color:#e39cff}
+.agente ul{margin:18px 24px 22px;padding-left:18px;color:var(--ink-2);font-size:15.5px}
+.agente ul li{margin:6px 0}
+.agente ul li b{color:var(--ink);font-weight:500}
+/* mapas (SVG no desktop, lista no celular) */
+.mapa{scroll-margin-top:84px;margin:40px 0 0;background:var(--bg-2);border:1px solid var(--rule);border-radius:var(--r);padding:22px 24px 18px}
+.mapa+.mapa{margin-top:24px}
+.mapa figcaption{color:var(--ink-2);font-size:15.5px;margin:0 0 18px;max-width:72ch}
+.mapa figcaption b{color:var(--ink);font-weight:600}
+.mapa svg{display:block;width:100%;height:auto}
+.mapa text{font-family:var(--sans)}
+.mapa .mono{font-family:var(--mono)}
+.mapa .t-title{fill:var(--ink);font-size:16px;font-weight:600}
+.mapa .t-title.s{font-size:14.5px}
+.mapa .t-sub{fill:var(--ink-2);font-size:13px}
+.mapa .t-col{fill:var(--gold);font-size:12px;letter-spacing:.08em}
+.mapa .lilac{fill:#e39cff}
+.mapa .gold-t{fill:var(--gold)}
+.mapa .node rect{fill:var(--panel);stroke:var(--rule);stroke-width:1.5}
+.mapa .node.gold rect{stroke:var(--gold)}
+.mapa .node.lilac rect{stroke:#e39cff}
+.mapa .node circle{fill:var(--steel)}
+.mapa .l-steel{fill:none;stroke:var(--steel);stroke-width:2.5}
+.mapa .l-gold{fill:none;stroke:var(--gold);stroke-width:1.8}
+.mapa .l-lilac{fill:none;stroke:#e39cff;stroke-width:1.8;stroke-dasharray:6 5}
+.mapa .l-rule{fill:none;stroke:var(--ink-2);stroke-width:1.2}
+.mapa .dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--steel);vertical-align:middle;margin:0 2px}
+.mapa .so-mobile{display:none}
+@media (max-width:720px){.mapa .so-desktop{display:none}.mapa div.so-mobile{display:block}.mapa ol.so-mobile{display:grid}.mapa{padding:18px 16px 14px}}
+.mapa-m{list-style:none;margin:0;padding:0 0 0 18px;border-left:2px solid var(--steel);display:grid;gap:10px}
+.mapa-m li{position:relative;background:var(--panel);border:1px solid var(--rule);border-radius:8px;padding:10px 12px;font-size:15px}
+.mapa-m li::before{content:"";position:absolute;left:-24px;top:16px;width:10px;height:10px;border-radius:50%;background:var(--steel);border:2px solid var(--bg-2)}
+.mapa-m li.gold{border-color:var(--gold)}.mapa-m li.gold::before{background:var(--gold)}
+.mapa-m li.lilac{border-color:#e39cff}.mapa-m li.lilac::before{background:#e39cff}
+.mapa-m li.atuo::after{content:"";position:absolute;right:10px;top:10px;width:8px;height:8px;border-radius:50%;background:var(--steel)}
+.mapa-m li b{display:block;color:var(--ink);font-weight:600}
+.mapa-m li span{display:block;color:var(--ink-2);font-size:14px}
+.mapa-m li.av{display:flex;align-items:center;gap:12px}
+.mapa-m li.av img{flex:none;width:56px;height:56px;border-radius:50%;background:#EEF1F4;border:2px solid var(--steel);object-fit:cover}
+.mapa-m-cols h4{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);margin:18px 0 8px}
+.mapa-m-cols h4:first-child{margin-top:0}
+.t-legenda{font-family:var(--mono);font-size:12px;color:var(--ink-2);margin:14px 0 0}
+
+/* ===== habilidades ===== */
+.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+@media (max-width:800px){.cols{grid-template-columns:1fr}}
+.cols h3{font-size:16px;margin:0 0 12px;padding-top:12px;border-top:2px solid var(--steel)}
+.cols h3.ia{border-top-color:#e39cff}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+.tags li{font-size:14px;padding:6px 10px;border:1px solid var(--rule);border-radius:5px;background:var(--bg-2)}
+
+/* ===== hardware (detalhe) ===== */
+.hw .sub{margin-bottom:20px}
+details.bancada-wrap{border:1px solid var(--rule);border-radius:var(--r);background:var(--bg-2)}
+details.bancada-wrap summary{cursor:pointer;padding:16px 20px;font-weight:500;list-style:none;display:flex;align-items:center;gap:12px}
+details.bancada-wrap summary::-webkit-details-marker{display:none}
+details.bancada-wrap summary::before{content:"";width:9px;height:9px;border-right:2px solid var(--steel);border-bottom:2px solid var(--steel);transform:rotate(-45deg);transition:transform .2s;flex:none}
+details[open].bancada-wrap summary::before{transform:rotate(45deg)}
+details.bancada-wrap summary small{color:var(--ink-2);font-weight:400;font-size:14px;margin-left:auto}
+.bancada{display:grid;grid-template-columns:1fr 1fr;gap:24px;padding:4px 20px 20px}
 @media (max-width:900px){.bancada{grid-template-columns:1fr}}
-.bench{min-width:0;position:relative;background:var(--bg-2);border:1px solid var(--rule);border-radius:10px;padding:22px 22px 18px}
+.bench{min-width:0;position:relative;background:var(--bg);border:1px solid var(--rule);border-radius:10px;padding:18px 18px 16px}
 .bench header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:8px;flex-wrap:wrap}
-.bench header h3{margin:0;font-size:19px;font-weight:600}
+.bench header h4{margin:0;font-size:17px;font-weight:600}
 .bench header .dica{font-family:var(--mono);font-size:12px;color:var(--ink-2)}
 .bench .toggle{appearance:none;border:1px solid var(--rule);background:var(--panel);color:var(--ink);font:inherit;font-size:14px;padding:7px 12px;border-radius:6px;cursor:pointer}
 .bench .toggle:hover{border-color:var(--steel)}
-.stage{position:relative;height:560px;margin:6px auto 0;overflow:hidden;border-radius:8px;
-  background:
-   linear-gradient(var(--rule) 1px,transparent 1px) 0 0/100% 40px,
-   linear-gradient(90deg,var(--rule) 1px,transparent 1px) 0 0/40px 100%;
+.stage{position:relative;height:480px;margin:6px auto 0;overflow:hidden;border-radius:8px;
+  background:linear-gradient(var(--rule) 1px,transparent 1px) 0 0/100% 40px,linear-gradient(90deg,var(--rule) 1px,transparent 1px) 0 0/40px 100%;
   background-color:#13181e}
-@media (max-width:640px){.stage{height:430px}}
+@media (max-width:640px){.stage{height:400px}}
 .stage::after{content:"";position:absolute;inset:0;background:radial-gradient(60% 60% at 50% 50%,transparent 40%,#13181e 100%);pointer-events:none}
 .dev{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:1;transition:transform .55s cubic-bezier(.2,.7,.2,1)}
-.open .dev.pc{transform:translate(calc(-50% - 18px),-50%) scale(.68)}
-.open .dev.cel{transform:translate(-50%,calc(-50% - 10px)) scale(.68)}
-@media (max-width:640px){.open .dev.pc{transform:translate(calc(-50% - 14px),-50%) scale(.5)}.open .dev.cel{transform:translate(-50%,calc(-50% - 8px)) scale(.52)}}
-@media (prefers-reduced-motion:reduce){.dev{transition:none}}
-.part{position:absolute;margin:0;padding:0;border:0;background:none;font:inherit;color:inherit;cursor:pointer;
-  transition:transform .55s cubic-bezier(.2,.7,.2,1),opacity .4s;will-change:transform;transform:translate(0,0)}
+.open .dev.pc{transform:translate(calc(-50% - 18px),-50%) scale(.62)}
+.open .dev.cel{transform:translate(-50%,calc(-50% - 10px)) scale(.62)}
+@media (max-width:640px){.open .dev.pc{transform:translate(calc(-50% - 14px),-50%) scale(.48)}.open .dev.cel{transform:translate(-50%,calc(-50% - 8px)) scale(.5)}}
+.part{position:absolute;margin:0;padding:0;border:0;background:none;font:inherit;color:inherit;cursor:pointer;transition:transform .55s cubic-bezier(.2,.7,.2,1),opacity .4s;will-change:transform;transform:translate(0,0)}
 .part .shape{position:absolute;inset:0;border-radius:3px;box-shadow:0 1px 0 rgba(255,255,255,.08) inset,0 6px 14px rgba(0,0,0,.35)}
-.part .lbl{position:absolute;left:50%;top:-22px;transform:translateX(-50%);white-space:nowrap;font-family:var(--mono);font-size:11px;color:var(--ink-2);opacity:0;transition:opacity .3s .25s;pointer-events:none;background:rgba(16,20,24,.8);padding:2px 6px;border-radius:3px}
+.part .lbl{position:absolute;left:50%;top:-22px;transform:translateX(-50%);white-space:nowrap;font-family:var(--mono);font-size:12px;color:var(--ink);opacity:0;transition:opacity .3s .25s;pointer-events:none;background:rgba(16,20,24,.85);padding:2px 6px;border-radius:3px}
 .open .part{transform:translate(var(--dx),var(--dy))}
-.open .part .lbl{opacity:1}
+.open .part .lbl{opacity:1;transform:translateX(-50%) scale(1.3);transform-origin:center bottom}
 .gabinete .lbl{top:auto;bottom:-22px}
-.open .part .lbl{transform:translateX(-50%) scale(1.3);transform-origin:center bottom}
 .part:hover .shape,.part.ativa .shape{outline:2px solid var(--gold);outline-offset:2px}
 .part:hover,.part.ativa{z-index:9}
-@media (prefers-reduced-motion:reduce){.part{transition:none}}
-
-/* --- PC: peças desenhadas --- */
+@media (prefers-reduced-motion:reduce){.dev,.part,.part .lbl{transition:none}}
 .pc{width:300px;height:440px}
 .gabinete .shape{background:linear-gradient(180deg,#2d343c,#1f252c);border:1px solid #3a434d;border-radius:8px;box-shadow:0 20px 40px rgba(0,0,0,.5)}
 .open .gabinete .shape{opacity:.55}
@@ -117,8 +289,6 @@ nav a:hover{opacity:1;text-decoration:underline}
 .fonte .shape{background:linear-gradient(180deg,#24292f,#15191d);border:1px solid #3a434d}
 .fonte .shape::after{content:"";position:absolute;left:12px;top:10px;width:50px;height:50px;border-radius:50%;border:4px solid #3d4650;background:repeating-conic-gradient(from 0deg,#4a535d 0 15deg,#15191d 15deg 40deg)}
 .fan .shape{border-radius:50%;border:4px solid #30373f;background:repeating-conic-gradient(from 0deg,#4a535d 0 15deg,#20252b 15deg 40deg)}
-
-/* --- Celular: peças --- */
 .cel{width:200px;height:400px}
 .tampa .shape{background:linear-gradient(160deg,#2b3e57,#16222f);border-radius:28px;border:1px solid #3a5070}
 .tela .shape{background:linear-gradient(160deg,#0b0f14,#141a21);border-radius:26px;border:3px solid #2a3139}
@@ -131,155 +301,608 @@ nav a:hover{opacity:1;text-decoration:underline}
 .camera .shape::before{left:6px;top:6px}.camera .shape::after{left:6px;top:25px}
 .falante .shape{background:#15191d;border:1px solid #3d4650;border-radius:6px;background-image:radial-gradient(#4a535d 1px,transparent 1.5px);background-size:6px 6px}
 .usb .shape{background:#c3cad2;border-radius:4px;border:1px solid #6e7883}
-
-/* painel de informação */
-.info{margin-top:16px;min-height:150px;background:var(--panel);border:1px solid var(--rule);border-radius:8px;padding:16px 18px}
-.info h4{margin:0 0 6px;font-size:17px;font-weight:600}
+.info{margin-top:14px;min-height:120px;background:var(--panel);border:1px solid var(--rule);border-radius:8px;padding:14px 16px}
+.info h5{margin:0 0 6px;font-size:16px;font-weight:600}
 .info p{margin:0 0 8px;color:var(--ink-2);font-size:15px}
 .info p b{color:var(--ink);font-weight:500}
 .info .vazio{color:var(--ink-2);font-size:15px;margin:0}
-
-/* projetos como lista */
-.proj{display:grid;grid-template-columns:150px 1fr;gap:24px;padding:28px 0;border-top:1px solid var(--rule)}
-.proj:last-of-type{border-bottom:1px solid var(--rule)}
-@media (max-width:640px){.proj{grid-template-columns:1fr;gap:8px}}
-.proj .meta{font-family:var(--mono);font-size:13px;color:var(--ink-2);line-height:1.7}
-.proj .meta b{display:block;color:var(--ink);font-weight:500}
-.tag{display:inline-block;margin-top:8px;padding:2px 8px;border-radius:4px;font-size:12px}
-.tag.pub{background:rgba(127,179,232,.15);color:var(--steel)}
-.tag.emp{background:rgba(217,169,75,.15);color:var(--gold)}
-.tag.prep{background:rgba(166,176,187,.14);color:var(--ink-2)}
-.proj h3{margin:0 0 8px;font-size:21px;letter-spacing:-.01em;font-weight:600}
-.proj p{margin:0 0 12px;max-width:62ch;color:var(--ink-2)}
-.proj ul{margin:0 0 14px;padding-left:18px;color:var(--ink-2)}
-.proj ul li{margin:4px 0}
-.proj .links{margin:12px 0 0}
-.proj .links a{display:inline-block;margin-right:18px;font-size:15px}
-.stack{font-family:var(--mono);font-size:13px;color:var(--ink-2)}
-
-/* na pratica: o que ja fiz */
-.pratica{margin-top:56px}
-.pratica h3{font-size:21px;font-weight:600;letter-spacing:-.01em;margin:0 0 6px}
-.pratica .sub{margin-bottom:24px}
-.feitos{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin:0;padding:0;list-style:none}
-@media (max-width:900px){.feitos{grid-template-columns:repeat(2,1fr)}}
+.feitos{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:24px 0 0;padding:0;list-style:none}
+@media (max-width:900px){.feitos{grid-template-columns:1fr 1fr}}
 @media (max-width:560px){.feitos{grid-template-columns:1fr}}
 .feito{background:var(--bg-2);border:1px solid var(--rule);border-radius:10px;overflow:hidden;display:flex;flex-direction:column}
-.feito .fig{aspect-ratio:4/3;background:#0d1115;display:block;overflow:hidden}
+.feito .fig{aspect-ratio:3/2;background:#0d1115;display:block;overflow:hidden}
 .feito .fig img,.feito .fig svg{width:100%;height:100%;display:block;object-fit:cover}
 .feito .fig.alto img{object-fit:contain}
-.feito .txt{padding:14px 16px 16px}
-.feito .onde{font-family:var(--mono);font-size:12px;color:var(--gold);display:block;margin-bottom:6px}
-.feito h4{margin:0 0 6px;font-size:17px;font-weight:600}
-.feito p{margin:0;color:var(--ink-2);font-size:15px}
+.feito .txt{padding:12px 14px 14px}
+.feito .onde{font-family:var(--mono);font-size:12px;color:var(--gold);display:block;margin-bottom:4px}
+.feito h4{margin:0 0 4px;font-size:16px;font-weight:600}
+.feito p{margin:0;color:var(--ink-2);font-size:14.5px}
 .nota-img{font-size:13px;color:var(--ink-2);margin:14px 0 0}
+.creditos-fotos{margin-top:8px;font-size:12.5px;color:var(--ink-2)}
+.creditos-fotos summary{cursor:pointer;display:inline-block;color:var(--ink-2);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+.creditos-fotos summary::-webkit-details-marker{display:none}
+.creditos-fotos summary::marker{content:""}
+.creditos-fotos p{margin:8px 0 0;max-width:80ch}
+.creditos-fotos a{color:var(--ink-2)}
 
-/* imagem do projeto */
-.proj .shot{display:block;margin:16px 0 0;max-width:620px;border:1px solid var(--rule);border-radius:8px;overflow:hidden;background:#0d1115}
-.proj .shot img{display:block;width:100%;height:auto}
-.creditos{font-size:13px;color:var(--ink-2);margin:0 0 20px;max-width:none}
-.creditos a{color:var(--ink-2)}
+/* ===== fundo animado ===== */
+#fundo{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none;opacity:.9}
+.hero::before{z-index:-1}
+.ctl-fundo{appearance:none;border:1px solid var(--rule);background:transparent;color:var(--ink-2);font:inherit;font-size:13px;padding:6px 10px;border-radius:6px;cursor:pointer}
+.ctl-fundo:hover{border-color:var(--steel);color:var(--ink)}
 
-/* habilidades e contato */
-.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
-@media (max-width:800px){.cols{grid-template-columns:1fr}}
-.cols h3{font-size:16px;font-weight:600;margin:0 0 10px;padding-top:12px;border-top:2px solid var(--steel)}
-.tags{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
-.tags li{font-size:14px;padding:5px 10px;border:1px solid var(--rule);border-radius:4px;background:var(--bg-2)}
+/* ===== filtros de projetos ===== */
+.filtros{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 24px}
+.filtros .rot{font-family:var(--mono);font-size:12.5px;color:var(--ink-2);margin-right:4px}
+.chip{appearance:none;border:1px solid var(--rule);background:var(--bg-2);color:var(--ink);font:inherit;font-size:14px;padding:7px 12px;border-radius:999px;cursor:pointer;line-height:1.2}
+.chip:hover{border-color:var(--steel)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chip .n{font-family:var(--mono);font-size:12px;opacity:.75;margin-left:4px}
+.lista-h .acoes{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.btn-mini{appearance:none;border:1px solid var(--rule);background:transparent;color:var(--ink-2);font:inherit;font-size:13.5px;padding:6px 10px;border-radius:6px;cursor:pointer}
+.btn-mini:hover{border-color:var(--steel);color:var(--ink)}
+.card[hidden],.proj[hidden]{display:none}
+.vazio-filtro{color:var(--ink-2);padding:28px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+
+/* projeto como details (abrir/recolher) */
+details.proj{display:block;padding:0}
+details.proj summary{display:grid;grid-template-columns:170px 1fr auto;gap:24px;padding:22px 0;cursor:pointer;list-style:none;align-items:start}
+details.proj summary::-webkit-details-marker{display:none}
+@media (max-width:640px){details.proj summary{grid-template-columns:1fr;gap:8px}}
+details.proj summary .curto{margin:6px 0 0;color:var(--ink-2);font-size:15.5px;max-width:64ch}
+details.proj summary .chev{width:28px;height:28px;border:1px solid var(--rule);border-radius:50%;display:grid;place-items:center;color:var(--ink-2);margin-top:2px;flex:none}
+details.proj summary .chev::before{content:"";width:8px;height:8px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg) translate(-1px,-1px);transition:transform .2s}
+details[open].proj summary .chev::before{transform:rotate(-135deg) translate(-1px,-1px)}
+@media (max-width:640px){details.proj summary .chev{position:absolute;right:0;top:22px}details.proj summary{position:relative;padding-right:40px}}
+details[open].proj summary .curto{display:none}
+details[open].proj summary .meta{display:none}
+details.proj summary .tit{grid-column:2}
+details.proj summary .chev{grid-column:3}
+details[open].proj summary{padding-bottom:12px}
+@media (max-width:640px){details.proj summary .tit,details.proj summary .chev{grid-column:auto}}
+details.proj summary:hover h3{text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
+details.proj .corpo{display:grid;grid-template-columns:170px 1fr;gap:24px;padding:0 0 26px}
+@media (max-width:640px){details.proj .corpo{grid-template-columns:1fr}}
+details.proj .corpo p:first-child{margin-top:0}
+@media (prefers-reduced-motion:reduce){details.proj summary .chev::before{transition:none}}
+
+/* ===== certificações ===== */
+.cert-resumo{display:flex;gap:28px;flex-wrap:wrap;margin:0 0 28px;padding:16px 20px;background:var(--bg-2);border:1px solid var(--rule);border-radius:var(--r)}
+.cert-resumo div b{display:block;font-size:22px;letter-spacing:-.02em;line-height:1.1}
+.cert-resumo div span{color:var(--ink-2);font-size:14px}
+.cert-grupo{margin-top:28px}
+.cert-grupo h3{font-size:17px;margin:0 0 4px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.cert-grupo h3 .org{font-family:var(--mono);font-size:12px;font-weight:400;color:var(--ink-2);letter-spacing:.04em}
+.cert-grupo .desc{color:var(--ink-2);font-size:14.5px;margin:0 0 14px;max-width:70ch}
+.certs{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:0;padding:0;list-style:none}
+@media (max-width:900px){.certs{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.certs{grid-template-columns:1fr}}
+.cert{background:var(--bg-2);border:1px solid var(--rule);border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.cert.ia{border-top:2px solid #e39cff}.cert.ibm{border-top:2px solid var(--steel)}.cert.ifrs{border-top:2px solid var(--green)}.cert.ms{border-top:2px solid var(--gold)}.cert.outro{border-top:2px solid var(--ink-2)}
+.cert b{font-weight:600;font-size:15.5px;line-height:1.3}
+.cert .meta{font-family:var(--mono);font-size:12.5px;color:var(--ink-2);line-height:1.6}
+.cert .meta em{font-style:normal;color:var(--gold)}
+.cert a.ver{margin-top:auto;font-size:14px;display:inline-flex;align-items:center;gap:6px;align-self:flex-start}
+.cert a.ver::after{content:"↗";font-size:12px}
+.cert .sem{margin-top:auto;font-size:13px;color:var(--ink-2)}
+
+/* ===== contato ===== */
+.contato{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+@media (max-width:800px){.contato{grid-template-columns:1fr}}
+.canais{margin:0;padding:0;list-style:none;display:grid;gap:12px}
+.canais li a{display:flex;align-items:center;gap:14px;padding:16px 18px;background:var(--bg-2);border:1px solid var(--rule);border-radius:var(--r);text-decoration:none;color:var(--ink)}
+.canais li a:hover{border-color:var(--steel)}
+.canais svg{width:22px;height:22px;flex:none;color:var(--steel)}
+.canais b{display:block;font-weight:500}
+.canais span{display:block;color:var(--ink-2);font-size:14px;font-family:var(--mono)}
+
 footer{padding:36px 0 56px;color:var(--ink-2);font-size:14px;border-top:1px solid var(--rule)}
 footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
-footer .wrap.creditos{display:block}
 footer a{color:var(--ink-2)}
 </style>
 </head>
 <body>
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+<canvas id="fundo" aria-hidden="true"></canvas>
 
-<header class="top">
+<header class="top" id="topo">
   <div class="wrap">
     <a class="brand" href="#">Henrique Matos</a>
-    <nav aria-label="Seções">
-      <a href="#hardware">Hardware</a>
-      <a href="#projetos">Projetos</a>
-      <a href="#habilidades">Habilidades</a>
-      <a href="#contato">Contato</a>
+    <nav aria-label="Seções do site">
+      <ul>
+        <li><a href="#projetos">Projetos</a></li>
+        <li><a href="#agentes">Agentes</a></li>
+        <li><a href="#ecossistema">Ecossistema</a></li>
+        <li><a href="#habilidades">Habilidades</a></li>
+        <li><a href="#certificacoes">Certificações</a></li>
+        <li><a href="#hardware">Hardware</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
     </nav>
   </div>
 </header>
 
-<section class="hero">
-  <div class="foto" id="foto" role="img" aria-label="Foto de Henrique Matos"></div>
+<main id="conteudo">
+
+<!-- ================= HERO ================= -->
+<section class="hero" aria-labelledby="titulo">
   <div class="wrap">
-    <span class="status">disponível para vagas de Assistente de TI</span>
-    <h1>Monto, conserto e automatizo. Do parafuso do gabinete ao robô que roda sozinho.</h1>
-    <p class="lead">Trabalho na área de tecnologia de uma empresa de crédito consignado. Cuido dos computadores e do ambiente da equipe, e construo sistemas web e automações que tiram trabalho repetitivo do dia a dia.</p>
-    <div class="acts">
-      <a class="btn primary" href="#hardware">Desmontar um PC</a>
-      <a class="btn ghost" href="https://github.com/Henrique-Mat0s">GitHub</a>
+    <div>
+      <span class="status">Desenvolvedor de automação com IA · disponível para projetos</span>
+      <h1 id="titulo">Automatizo processos com <em>agentes de IA</em>, integrações e bots que tiram o trabalho repetitivo das equipes.</h1>
+      <p class="lead">Técnico em Desenvolvimento de Sistemas, 19 anos. Hoje trabalho com a GigaCred, empresa de crédito consignado: configuro agentes no Claude Code e no Hermes Agent, construo fluxos no n8n, robôs de consulta em portais e sistemas web que organizam a operação.</p>
+      <div class="acts">
+        <a class="btn primary" href="#projetos">Ver projetos</a>
+        <!-- AJUSTE: exporte o currículo em PDF e salve como curriculo-henrique-matos.pdf na raiz do repositório. -->
+        <a class="btn ghost" href="curriculo-henrique-matos.pdf" download>
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+          Baixar currículo
+        </a>
+        <a class="btn ghost" href="https://github.com/Henrique-Mat0s">GitHub</a>
+      </div>
+      <dl class="nums">
+        <div class="num"><dt class="sr">Projetos</dt><dd style="margin:0"><b>8</b><span>projetos entregues em 2026</span></dd></div>
+        <div class="num"><dt class="sr">Agentes</dt><dd style="margin:0"><b>2</b><span>agentes de IA configurados</span></dd></div>
+        <div class="num"><dt class="sr">Certificações</dt><dd style="margin:0"><b>20+</b><span>certificações em IA, dados e automação</span></dd></div>
+      </dl>
+    </div>
+
+    <div class="visual" id="visual">
+      <!-- A foto entra aqui quando o arquivo foto.jpg existir na raiz do repositório. -->
+      <img class="foto" src="foto.jpg" alt="Henrique Matos" width="420" height="525" id="foto">
+      <figure class="term" style="margin:0" aria-label="Exemplo de uma automação em execução">
+        <div class="bar" aria-hidden="true"><i></i><i></i><i></i><span>automacao · log</span></div>
+<pre aria-hidden="true"><span class="c">$</span> <span class="k">n8n</span> webhook <span class="y">proposta.assinada</span>
+<span class="g">✓</span> planilha lida · 42 propostas pendentes
+<span class="g">✓</span> agente classificou 42/42 · 0 erros
+<span class="g">✓</span> 37 mensagens enviadas · 5 marcadas p/ humano
+<span class="c">#</span> registro gravado em <span class="k">postgres</span> · 1,8 s
+
+<span class="c">$</span> <span class="p">claude</span> <span class="c">--skill</span> registrar-no-brain
+<span class="g">✓</span> decisão documentada · <span class="y">brain/decisoes/2026-11.md</span>
+<span class="g">✓</span> verificador: nenhum dado pessoal no commit</pre>
+        <figcaption class="sr">Exemplo ilustrativo de uma automação: um webhook do n8n lê uma planilha, um agente classifica as propostas, mensagens são enviadas e o registro é gravado no banco. Em seguida, o Claude Code documenta a decisão na base de conhecimento.</figcaption>
+      </figure>
     </div>
   </div>
 </section>
 
-<section class="block" id="hardware">
+<!-- ================= PROJETOS ================= -->
+<section class="block" id="projetos" aria-labelledby="h-projetos">
   <div class="wrap">
-    <h2>Hardware</h2>
-    <p class="sub">Passe o mouse sobre o computador ou o celular para ver as peças se separarem. Toque ou passe o mouse em uma peça para ler o que ela faz e, nas peças em que já mexi, a minha experiência. No celular, use o botão.</p>
+    <span class="eyebrow">Projetos</span>
+    <h2 id="h-projetos">O que construí</h2>
+    <p class="sub">Três destaques primeiro, depois a lista completa. Os sistemas publicados são <b>modelos</b>: versões genéricas, com identidade neutra e dados fictícios gerados por script, que eu personalizo conforme a operação de cada cliente. Os do trabalho atual são descritos sem código nem dados, por confidencialidade.</p>
 
-    <div class="bancada">
-      <!-- ===== PC ===== -->
-      <div class="bench" id="bench-pc">
-        <header>
-          <h3>Computador de mesa</h3>
-          <span class="dica">10 peças</span>
-          <button class="toggle" type="button" data-bench="bench-pc" aria-pressed="false">Desmontar</button>
-        </header>
-        <div class="stage">
-          <div class="dev pc">
-            <button class="part gabinete" data-k="gabinete" style="left:0;top:0;width:300px;height:440px;--dx:-40px;--dy:0px"><span class="shape"></span><span class="lbl">Gabinete</span></button>
-            <button class="part placa" data-k="placa" style="left:30px;top:40px;width:220px;height:300px;--dx:-30px;--dy:10px"><span class="shape"></span><span class="lbl">Placa-mãe</span></button>
-            <button class="part cpu" data-k="cpu" style="left:110px;top:95px;width:60px;height:60px;--dx:-10px;--dy:-130px"><span class="shape"></span><span class="lbl">Processador</span></button>
-            <button class="part cooler" data-k="cooler" style="left:96px;top:81px;width:88px;height:88px;--dx:60px;--dy:-190px"><span class="shape"></span><span class="lbl">Cooler</span></button>
-            <button class="part ram" data-k="ram" style="left:196px;top:70px;width:14px;height:120px;--dx:120px;--dy:-80px"><span class="shape"></span><span class="lbl">Memória RAM</span></button>
-            <button class="part ram" data-k="ram" style="left:216px;top:70px;width:14px;height:120px;--dx:140px;--dy:-80px"><span class="shape"></span></button>
-            <button class="part gpu" data-k="gpu" style="left:40px;top:225px;width:200px;height:56px;--dx:150px;--dy:40px"><span class="shape"></span><span class="lbl">Placa de vídeo</span></button>
-            <button class="part ssd" data-k="ssd" style="left:60px;top:190px;width:90px;height:22px;--dx:-150px;--dy:-30px"><span class="shape"></span><span class="lbl">SSD NVMe</span></button>
-            <button class="part hd" data-k="hd" style="left:30px;top:360px;width:110px;height:62px;--dx:-140px;--dy:80px"><span class="shape"></span><span class="lbl">Disco rígido</span></button>
-            <button class="part fonte" data-k="fonte" style="left:150px;top:355px;width:130px;height:72px;--dx:120px;--dy:110px"><span class="shape"></span><span class="lbl">Fonte</span></button>
-            <button class="part fan" data-k="fan" style="left:258px;top:50px;width:36px;height:36px;--dx:170px;--dy:-60px"><span class="shape"></span><span class="lbl">Ventoinhas</span></button>
-            <button class="part fan" data-k="fan" style="left:258px;top:130px;width:36px;height:36px;--dx:170px;--dy:-20px"><span class="shape"></span></button>
-          </div>
+    <div class="filtros" role="group" aria-label="Filtrar projetos" id="filtros">
+      <span class="rot">Mostrar:</span>
+      <button class="chip" type="button" data-f="todos" aria-pressed="true">Todos <span class="n" id="n-todos"></span></button>
+      <button class="chip" type="button" data-f="ia" aria-pressed="false">Com IA <span class="n" id="n-ia"></span></button>
+      <button class="chip" type="button" data-f="aberto" aria-pressed="false">Código aberto <span class="n" id="n-aberto"></span></button>
+      <button class="chip" type="button" data-f="trabalho" aria-pressed="false">Trabalho <span class="n" id="n-trabalho"></span></button>
+      <button class="chip" type="button" data-f="web" aria-pressed="false">Sistemas web <span class="n" id="n-web"></span></button>
+    </div>
+
+    <ul class="destaques" id="destaques" aria-label="Projetos em destaque"></ul>
+
+    <div class="lista-h">
+      <h3>Todos os projetos</h3>
+      <div class="acoes"><span id="contagem" aria-live="polite"></span><button class="btn-mini" type="button" id="alternar">Recolher todos</button></div>
+    </div>
+    <div id="lista-projetos"></div>
+    <p class="vazio-filtro" id="vazio" hidden>Nenhum projeto nesse filtro.</p>
+    <noscript><p class="sub">Ative o JavaScript para ver a lista, ou veja os repositórios em <a href="https://github.com/Henrique-Mat0s">github.com/Henrique-Mat0s</a>.</p></noscript>
+
+    <div class="como">
+      <h3>Como trabalho</h3>
+      <ol>
+        <li><b>Primeiro a regra, depois o código.</b> O que o sistema aceita, recusa e mostra é escrito e numerado antes; os testes conferem a regra.</li>
+        <li><b>Nada toca produção sem combinar.</b> Simuladores, cópias locais e banco somente leitura até a regra estar aprovada.</li>
+        <li><b>Quem usa não precisa de terminal.</b> Atalhos, LEIA-ME simples e retomada automática quando algo cai.</li>
+      </ol>
+      <p>O código é escrito com o apoio do Claude Code, a partir dos requisitos e das regras definidos para cada sistema. Senhas e chaves ficam fora do Git, em arquivos <code>.env</code>, sem valor padrão no código.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= AGENTES ================= -->
+<section class="block" id="agentes" aria-labelledby="h-agentes">
+  <div class="wrap">
+    <span class="eyebrow">Agentes de IA</span>
+    <h2 id="h-agentes">Como configuro os agentes que uso no trabalho</h2>
+    <p class="sub">Um agente só é útil se souber as regras do negócio e tiver limites claros. É isso que configuro: contexto, procedimentos repetíveis e verificações automáticas.</p>
+
+    <div class="agentes">
+      <!-- ---------- Claude Code ---------- -->
+      <article class="agente" aria-labelledby="h-claude">
+        <div class="cab">
+          <span class="eyebrow" style="color:#e39cff">Claude Code · Anthropic</span>
+          <h3 id="h-claude">Agente de desenvolvimento com memória do projeto</h3>
+          <p>Uso o Claude Code ligado a uma base de conhecimento em Obsidian versionada com Git, o "segundo cérebro". O agente lê o contexto do projeto antes de qualquer tarefa e segue procedimentos que eu escrevi.</p>
         </div>
-        <div class="info" id="info-pc" aria-live="polite"><p class="vazio">Escolha uma peça para ler sobre ela.</p></div>
+        <div class="cfg" role="img" aria-label="Estrutura da configuração do Claude Code: arquivo CLAUDE.md com as regras, pasta de skills com procedimentos, hooks de verificação e base de conhecimento em Obsidian">
+          <div class="bar" aria-hidden="true"><i></i><i></i><i></i><span>.claude/</span></div>
+<pre aria-hidden="true"><span class="k">CLAUDE.md</span>  <span class="c"># regras e contexto</span>
+<span class="k">.claude/</span>
+├─ <span class="y">skills/</span>
+│  ├─ registrar-no-brain/  <span class="c"># decisões</span>
+│  └─ revisar-regras/      <span class="c"># regras</span>
+├─ <span class="y">agents/</span>
+│  └─ engenheiro.md        <span class="c"># revisa</span>
+└─ <span class="y">settings.json</span>           <span class="c"># hooks</span>
+<span class="k">brain/</span>     <span class="c"># Obsidian + Git</span>
+├─ sistemas/  processos/  decisoes/
+<span class="g">hook pre-commit</span> → sem dados pessoais</pre>
+        </div>
+        <ul>
+          <li><b>Contexto antes de agir:</b> o <code>CLAUDE.md</code> aponta para o segundo cérebro, então o agente conhece sistemas, tabelas e regras de negócio sem eu repetir a cada sessão.</li>
+          <li><b>Skills:</b> procedimentos repetíveis, como registrar uma decisão ou revisar uma regra, viram comandos que o agente executa sempre do mesmo jeito.</li>
+          <li><b>Verificação automática:</b> um hook no Git impede que dados pessoais de clientes entrem no repositório.</li>
+          <li><b>Subagentes:</b> um agente "engenheiro" revisa a arquitetura antes de qualquer mudança em banco ou robô.</li>
+        </ul>
+      </article>
+
+      <!-- ---------- Hermes Agent ---------- -->
+      <article class="agente" aria-labelledby="h-hermes">
+        <div class="cab">
+          <span class="eyebrow" style="color:var(--steel)">Hermes Agent · código aberto</span>
+          <h3 id="h-hermes">Agente de rotina que acompanha meus projetos e me avisa</h3>
+          <p>O Hermes cuida dos meus fluxos de IA e acompanha os projetos entregues aos clientes. Toda hora, à tarde, ele me envia um ping dizendo se algum projeto dentro do prazo de garantia está ativo com problema. Quando identifico algo errado, passo o caso para o Claude Code.</p>
+        </div>
+        <div class="cfg" role="img" aria-label="Estrutura da configuração do Hermes Agent: config.yaml com modelo e canais, SOUL.md com a persona, skills de projetos dos clientes e de garantia, memória persistente, tarefa agendada de hora em hora à tarde e gateway de mensagens">
+          <div class="bar" aria-hidden="true"><i></i><i></i><i></i><span>~/.hermes/</span></div>
+<pre aria-hidden="true"><span class="k">config.yaml</span>  <span class="c"># modelo e canais</span>
+<span class="k">SOUL.md</span>      <span class="c"># persona e tom</span>
+<span class="y">skills/</span>
+├─ projetos-clientes/  <span class="c"># acompanha entregas</span>
+└─ garantia/           <span class="c"># prazo e status</span>
+<span class="y">memory/</span>      <span class="c"># projetos, prazos, clientes</span>
+<span class="y">cron/</span>
+└─ tarde, a cada hora  <span class="c"># ping p/ mim</span>
+<span class="g">gateway</span> → mensagens para mim</pre>
+        </div>
+        <ul>
+          <li><b>Rotina sem eu pedir:</b> as tarefas rodam em horário fixo; eu só recebo o resultado.</li>
+          <li><b>Memória dos projetos:</b> ele guarda o que foi entregue a cada cliente e até quando vale a garantia.</li>
+          <li><b>Ping de hora em hora, à tarde:</b> um resumo curto dizendo se há projeto em garantia ativo com problema.</li>
+          <li><b>Escalonamento:</b> o Hermes detecta, eu decido e o Claude Code corrige e documenta.</li>
+        </ul>
+      </article>
+    </div>
+
+    <!-- ===== Mapa 1: Hermes → eu → Claude ===== -->
+    <figure class="mapa" id="mapa-hermes">
+      <figcaption><b>Mapa 1 · Como os dois dividem o trabalho.</b> O Hermes roda sozinho e me avisa; eu decido; o Claude Code resolve.</figcaption>
+      <svg class="so-desktop" viewBox="0 0 1000 560" role="img" aria-label="Mapa mental: o Hermes Agent, no centro, cuida dos fluxos de IA, acompanha os projetos dos clientes e verifica o prazo de garantia; à tarde envia um ping de hora em hora para mim; se algo está errado, eu passo o caso para o Claude Code." xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <clipPath id="clip-av1"><circle cx="150" cy="280" r="80"/></clipPath>
+          <radialGradient id="glow1"><stop offset="0" stop-color="#7FB3E8" stop-opacity=".35"/><stop offset="1" stop-color="#7FB3E8" stop-opacity="0"/></radialGradient>
+          <marker id="ar-steel1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#7FB3E8"/></marker>
+          <marker id="ar-gold1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D9A94B"/></marker>
+          <marker id="ar-lilac1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#e39cff"/></marker>
+        </defs>
+        <!-- ramos: Hermes -> deveres -->
+        <path class="l-steel" d="M232 280 C 270 280, 262 120, 300 120"/>
+        <path class="l-steel" d="M232 280 L 300 280"/>
+        <path class="l-steel" d="M232 280 C 270 280, 262 440, 300 440"/>
+        <!-- deveres -> ping -->
+        <path class="l-gold" d="M540 280 L 610 280" marker-end="url(#ar-gold1)"/>
+        <path class="l-gold" d="M540 440 C 580 440, 572 300, 610 290" marker-end="url(#ar-gold1)"/>
+        <!-- ping -> eu -->
+        <path class="l-steel" d="M800 280 L 842 280" marker-end="url(#ar-steel1)"/>
+        <!-- eu -> Claude (escalonamento) -->
+        <path class="l-lilac" d="M880 244 L 880 130" marker-end="url(#ar-lilac1)"/>
+
+        <!-- avatar Hermes -->
+        <circle cx="150" cy="280" r="118" fill="url(#glow1)"/>
+        <circle cx="150" cy="280" r="80" fill="#EEF1F4"/>
+        <image href="img/hermes.png" x="70" y="200" width="160" height="160" clip-path="url(#clip-av1)" preserveAspectRatio="xMidYMid slice"/>
+        <circle cx="150" cy="280" r="80" fill="none" stroke="#7FB3E8" stroke-width="3"/>
+        <text x="150" y="392" class="t-title" text-anchor="middle">Hermes Agent</text>
+        <text x="150" y="412" class="t-sub mono" text-anchor="middle">roda sozinho, todo dia</text>
+
+        <!-- deveres -->
+        <g class="node"><rect x="300" y="78" width="240" height="84" rx="10"/>
+          <text x="318" y="110" class="t-title">Fluxos de IA</text>
+          <text x="318" y="134" class="t-sub">mantém os fluxos de IA</text><text x="318" y="152" class="t-sub">que uso no dia a dia</text></g>
+        <g class="node"><rect x="300" y="238" width="240" height="84" rx="10"/>
+          <text x="318" y="270" class="t-title">Projetos dos clientes</text>
+          <text x="318" y="294" class="t-sub">acompanha cada projeto</text><text x="318" y="312" class="t-sub">entregue</text></g>
+        <g class="node"><rect x="300" y="398" width="240" height="84" rx="10"/>
+          <text x="318" y="430" class="t-title">Prazo de garantia</text>
+          <text x="318" y="454" class="t-sub">verifica se algum projeto em</text><text x="318" y="472" class="t-sub">garantia está ativo com problema</text></g>
+
+        <!-- ping -->
+        <g class="node gold"><rect x="610" y="238" width="190" height="84" rx="10"/>
+          <text x="628" y="270" class="t-title">Ping de hora em hora</text>
+          <text x="628" y="294" class="t-sub">à tarde, me manda</text><text x="628" y="312" class="t-sub">o status</text></g>
+
+        <!-- eu -->
+        <circle cx="880" cy="280" r="36" fill="#1d242c" stroke="#7FB3E8" stroke-width="2"/>
+        <text x="880" y="286" class="t-title" text-anchor="middle">Eu</text>
+        <text x="880" y="340" class="t-sub" text-anchor="middle">leio o ping</text>
+        <text x="880" y="358" class="t-sub" text-anchor="middle">tudo certo? sigo o dia</text>
+        <text x="866" y="178" class="t-sub lilac" text-anchor="end">algo errado?</text>
+        <text x="866" y="196" class="t-sub lilac" text-anchor="end">passo o caso</text>
+
+        <!-- Claude -->
+        <g class="node lilac"><rect x="790" y="56" width="180" height="72" rx="10"/>
+          <text x="808" y="86" class="t-title">Claude Code</text>
+          <text x="808" y="110" class="t-sub">corrige e documenta</text></g>
+      </svg>
+      <ol class="so-mobile mapa-m" aria-label="Versão em lista do mapa 1">
+        <li class="av"><img src="img/hermes.png" alt="" width="72" height="72"><div><b>Hermes Agent</b><span>roda sozinho, todo dia</span></div></li>
+        <li><b>Fluxos de IA</b><span>mantém os fluxos de IA que uso no dia a dia</span></li>
+        <li><b>Projetos dos clientes</b><span>acompanha cada projeto entregue</span></li>
+        <li><b>Prazo de garantia</b><span>verifica se algum projeto em garantia está ativo com problema</span></li>
+        <li class="gold"><b>Ping de hora em hora</b><span>à tarde, me manda o status</span></li>
+        <li><b>Eu</b><span>leio o ping; tudo certo, sigo o dia</span></li>
+        <li class="lilac"><b>Algo errado? Claude Code</b><span>corrige e documenta</span></li>
+      </ol>
+    </figure>
+
+    <!-- ===== Mapa 2: ecossistema da GigaCred ===== -->
+    <figure class="mapa" id="ecossistema">
+      <figcaption><b>Mapa 2 · Onde isso roda.</b> O ecossistema de automação da GigaCred, do cliente no WhatsApp até o pós-venda. Os pontos <span class="dot" aria-hidden="true"></span> marcam onde atuo hoje.</figcaption>
+      <svg class="so-desktop" viewBox="0 0 900 770" role="img" aria-label="Mapa do ecossistema: o cliente fala pelo WhatsApp, a equipe atende no Chatwoot, o n8n processa mensagens e consultas, um agente de IA responde por etapa do funil e os documentos passam por OCR para a pasta do cliente. A operação segue na mesa de acompanhamento, triagem, robôs de digitação nos portais dos bancos, acompanhamento a cada 15 minutos e pós-venda diário. Tudo grava em PostgreSQL. Na base, o painel web, o monitoramento, o segundo cérebro, o Claude Code e o Hermes controlam e documentam o conjunto." xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <clipPath id="clip-av2"><circle cx="804" cy="664" r="18"/></clipPath>
+          <marker id="ar-steel2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#7FB3E8"/></marker>
+          <marker id="ar-gold2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#D9A94B"/></marker>
+          <marker id="ar-lilac2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#e39cff"/></marker>
+        </defs>
+        <!-- cabeçalhos das colunas -->
+        <text x="20" y="40" class="t-col mono">ENTRADA</text>
+        <text x="330" y="40" class="t-col mono">PROCESSAMENTO</text>
+        <text x="640" y="40" class="t-col mono">OPERAÇÃO</text>
+
+        <!-- espinha (azul) -->
+        <path class="l-steel" d="M140 138 L 140 170" marker-end="url(#ar-steel2)"/>
+        <path class="l-steel" d="M260 190 C 300 190, 292 109, 330 109" marker-end="url(#ar-steel2)"/>
+        <path class="l-steel" d="M570 109 L 640 109" marker-end="url(#ar-steel2)"/>
+        <path class="l-steel" d="M760 138 L 760 170" marker-end="url(#ar-steel2)"/>
+        <path class="l-steel" d="M760 228 L 760 260" marker-end="url(#ar-steel2)"/>
+        <path class="l-steel" d="M760 318 L 760 350" marker-end="url(#ar-steel2)"/>
+        <path class="l-steel" d="M760 408 L 760 440" marker-end="url(#ar-steel2)"/>
+        <!-- IA responde na conversa (lilás) -->
+        <path class="l-lilac" d="M330 212 L 260 212" marker-end="url(#ar-lilac2)"/>
+        <!-- documentos saem da conversa (dourado) -->
+        <path class="l-gold" d="M200 228 C 200 289, 290 289, 330 289" marker-end="url(#ar-gold2)"/>
+        <!-- gravações no banco (dourado) -->
+        <path class="l-gold" d="M450 318 L 450 540" marker-end="url(#ar-gold2)"/>
+        <path class="l-gold" d="M760 498 L 760 540" marker-end="url(#ar-gold2)"/>
+        <!-- colchete da base -->
+        <path class="l-rule" d="M20 626 L 20 616 L 884 616 L 884 626"/>
+        <text x="452" y="608" class="t-sub mono" text-anchor="middle">controle, documentação e manutenção de tudo acima</text>
+
+        <!-- ENTRADA -->
+        <g class="node"><rect x="20" y="80" width="240" height="58" rx="10"/>
+          <text x="36" y="104" class="t-title">Cliente no WhatsApp</text><text x="36" y="126" class="t-sub">pede simulação, envia documentos</text></g>
+        <g class="node"><rect x="20" y="170" width="240" height="58" rx="10"/>
+          <text x="36" y="194" class="t-title">Chatwoot</text><text x="36" y="216" class="t-sub">equipe atende; etiquetas por etapa</text></g>
+
+        <!-- PROCESSAMENTO -->
+        <g class="node atuo"><rect x="330" y="80" width="240" height="58" rx="10"/><circle cx="556" cy="94" r="5"/>
+          <text x="346" y="104" class="t-title">n8n</text><text x="346" y="126" class="t-sub">webhooks, consultas, simulações, régua</text></g>
+        <g class="node lilac atuo"><rect x="330" y="170" width="240" height="58" rx="10"/><circle cx="556" cy="184" r="5"/>
+          <text x="346" y="194" class="t-title">IA de atendimento</text><text x="346" y="216" class="t-sub">uma IA por etapa + base de conhecimento</text></g>
+        <g class="node"><rect x="330" y="260" width="240" height="58" rx="10"/>
+          <text x="346" y="284" class="t-title">Documentos → OCR</text><text x="346" y="306" class="t-sub">pasta do cliente em nuvem</text></g>
+
+        <!-- OPERAÇÃO -->
+        <g class="node"><rect x="640" y="80" width="240" height="58" rx="10"/>
+          <text x="656" y="104" class="t-title">Mesa de acompanhamento</text><text x="656" y="126" class="t-sub">planilha com abas por etapa</text></g>
+        <g class="node"><rect x="640" y="170" width="240" height="58" rx="10"/>
+          <text x="656" y="194" class="t-title">Triagem</text><text x="656" y="216" class="t-sub">viabilidade e escolha do banco</text></g>
+        <g class="node atuo"><rect x="640" y="260" width="240" height="58" rx="10"/><circle cx="866" cy="274" r="5"/>
+          <text x="656" y="284" class="t-title">Robôs de digitação</text><text x="656" y="306" class="t-sub">Playwright nos portais dos bancos</text></g>
+        <g class="node"><rect x="640" y="350" width="240" height="58" rx="10"/>
+          <text x="656" y="374" class="t-title">Acompanhamento</text><text x="656" y="396" class="t-sub">confere a esteira a cada 15 min</text></g>
+        <g class="node"><rect x="640" y="440" width="240" height="58" rx="10"/>
+          <text x="656" y="464" class="t-title">Pós-venda</text><text x="656" y="486" class="t-sub">régua diária às 15h pelo WhatsApp</text></g>
+
+        <!-- DADOS -->
+        <g class="node gold atuo"><rect x="20" y="540" width="864" height="52" rx="10"/><circle cx="870" cy="554" r="5"/>
+          <text x="36" y="562" class="t-title">PostgreSQL</text>
+          <text x="36" y="582" class="t-sub">clientes, histórico de mensagens, documentos, simulações, fila e eventos dos robôs</text></g>
+
+        <!-- BASE: controle e IA -->
+        <g class="node atuo"><rect x="20" y="636" width="160" height="70" rx="10"/><circle cx="166" cy="650" r="5"/>
+          <text x="34" y="660" class="t-title s">Painel web</text><text x="34" y="680" class="t-sub">liga/desliga robôs</text><text x="34" y="696" class="t-sub">janela 08h–22h</text></g>
+        <g class="node atuo"><rect x="196" y="636" width="160" height="70" rx="10"/><circle cx="342" cy="650" r="5"/>
+          <text x="210" y="660" class="t-title s">Monitoramento</text><text x="210" y="680" class="t-sub">resumo dos robôs</text><text x="210" y="696" class="t-sub">de hora em hora</text></g>
+        <g class="node atuo"><rect x="372" y="636" width="160" height="70" rx="10"/><circle cx="518" cy="650" r="5"/>
+          <text x="386" y="660" class="t-title s">Segundo cérebro</text><text x="386" y="680" class="t-sub">Obsidian + Git</text><text x="386" y="696" class="t-sub">regras e decisões</text></g>
+        <g class="node lilac atuo"><rect x="548" y="636" width="160" height="70" rx="10"/><circle cx="694" cy="650" r="5"/>
+          <text x="562" y="660" class="t-title s">Claude Code</text><text x="562" y="680" class="t-sub">desenvolve com o</text><text x="562" y="696" class="t-sub">contexto do cérebro</text></g>
+        <g class="node atuo"><rect x="724" y="636" width="160" height="70" rx="10"/><circle cx="870" cy="650" r="5"/>
+          <circle cx="804" cy="664" r="18" fill="#EEF1F4"/>
+          <image href="img/hermes.png" x="786" y="646" width="36" height="36" clip-path="url(#clip-av2)" preserveAspectRatio="xMidYMid slice"/>
+          <text x="738" y="696" class="t-title s">Hermes Agent</text></g>
+        <circle cx="26" cy="740" r="5" fill="#7FB3E8"/><text x="40" y="744" class="t-sub mono">onde atuo hoje</text>
+        <path class="l-steel" d="M190 740 L 218 740"/><text x="228" y="744" class="t-sub mono">fluxo principal</text>
+        <path class="l-gold" d="M370 740 L 398 740"/><text x="408" y="744" class="t-sub mono">dados</text>
+        <path class="l-lilac" d="M480 740 L 508 740"/><text x="518" y="744" class="t-sub mono">IA</text>
+      </svg>
+      <div class="so-mobile mapa-m-cols">
+        <h4>Entrada</h4>
+        <ol class="mapa-m"><li><b>Cliente no WhatsApp</b><span>pede simulação, envia documentos</span></li><li><b>Chatwoot</b><span>equipe atende; etiquetas por etapa</span></li></ol>
+        <h4>Processamento</h4>
+        <ol class="mapa-m"><li class="atuo"><b>n8n</b><span>webhooks, consultas, simulações, régua</span></li><li class="lilac atuo"><b>IA de atendimento</b><span>uma IA por etapa + base de conhecimento</span></li><li><b>Documentos → OCR</b><span>pasta do cliente em nuvem</span></li></ol>
+        <h4>Operação</h4>
+        <ol class="mapa-m"><li><b>Mesa de acompanhamento</b><span>planilha com abas por etapa</span></li><li><b>Triagem</b><span>viabilidade e escolha do banco</span></li><li class="atuo"><b>Robôs de digitação</b><span>Playwright nos portais dos bancos</span></li><li><b>Acompanhamento</b><span>confere a esteira a cada 15 min</span></li><li><b>Pós-venda</b><span>régua diária às 15h pelo WhatsApp</span></li></ol>
+        <h4>Dados</h4>
+        <ol class="mapa-m"><li class="gold atuo"><b>PostgreSQL</b><span>clientes, histórico, documentos, simulações, fila e eventos dos robôs</span></li></ol>
+        <h4>Controle, documentação e manutenção</h4>
+        <ol class="mapa-m"><li class="atuo"><b>Painel web</b><span>liga/desliga robôs · janela 08h–22h</span></li><li class="atuo"><b>Monitoramento</b><span>resumo dos robôs de hora em hora</span></li><li class="atuo"><b>Segundo cérebro</b><span>Obsidian + Git · regras e decisões</span></li><li class="lilac atuo"><b>Claude Code</b><span>desenvolve com o contexto do cérebro</span></li><li class="atuo av"><img src="img/hermes.png" alt="" width="40" height="40"><div><b>Hermes Agent</b><span>rotina e pings à tarde</span></div></li></ol>
+        <p class="t-legenda">● onde atuo hoje</p>
       </div>
+    </figure>
+  </div>
+</section>
 
-      <!-- ===== Celular ===== -->
-      <div class="bench" id="bench-cel">
-        <header>
-          <h3>Celular</h3>
-          <span class="dica">7 peças</span>
-          <button class="toggle" type="button" data-bench="bench-cel" aria-pressed="false">Desmontar</button>
-        </header>
-        <div class="stage">
-          <div class="dev cel">
-            <button class="part tampa" data-k="tampa" style="left:0;top:0;width:200px;height:400px;--dx:150px;--dy:0px"><span class="shape"></span><span class="lbl">Tampa traseira</span></button>
-            <button class="part bateria" data-k="bateria" style="left:50px;top:140px;width:100px;height:170px;--dx:0px;--dy:110px"><span class="shape"></span><span class="lbl">Bateria</span></button>
-            <button class="part logica" data-k="logica" style="left:30px;top:30px;width:140px;height:95px;--dx:0px;--dy:-90px"><span class="shape"></span><span class="lbl">Placa lógica</span></button>
-            <button class="part camera" data-k="camera" style="left:148px;top:36px;width:28px;height:48px;--dx:110px;--dy:-120px"><span class="shape"></span><span class="lbl">Câmeras</span></button>
-            <button class="part falante" data-k="falante" style="left:40px;top:330px;width:60px;height:22px;--dx:-80px;--dy:120px"><span class="shape"></span><span class="lbl">Alto-falante</span></button>
-            <button class="part usb" data-k="usb" style="left:88px;top:385px;width:30px;height:10px;--dx:60px;--dy:160px"><span class="shape"></span><span class="lbl">Conector de carga</span></button>
-            <button class="part tela" data-k="tela" style="left:0;top:0;width:200px;height:400px;--dx:-150px;--dy:0px"><span class="shape"></span><span class="lbl">Tela</span></button>
-          </div>
-        </div>
-        <div class="info" id="info-cel" aria-live="polite"><p class="vazio">Escolha uma peça para ler sobre ela.</p></div>
+<!-- ================= HABILIDADES ================= -->
+<section class="block" id="habilidades" aria-labelledby="h-hab">
+  <div class="wrap">
+    <span class="eyebrow">Habilidades</span>
+    <h2 id="h-hab">O que uso no trabalho</h2>
+    <p class="sub">Agrupado do que mais uso para o que uso de apoio.</p>
+    <div class="cols">
+      <div>
+        <h3 class="ia">IA e agentes</h3>
+        <ul class="tags">
+          <li>Claude Code</li><li>Hermes Agent</li><li>Skills e subagentes</li><li>Bases de conhecimento (Obsidian + Git)</li><li>Engenharia de prompts</li><li>Groq API</li><li>Fundamentos de Machine Learning</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Automação e integração</h3>
+        <ul class="tags">
+          <li>n8n</li><li>Webhooks e APIs REST</li><li>Python</li><li>Playwright</li><li>Chrome DevTools Protocol</li><li>WhatsApp (Baileys)</li><li>IMAP</li><li>Scripts .bat e PowerShell</li><li>Google Sheets API</li><li>Chatwoot</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Desenvolvimento e dados</h3>
+        <ul class="tags">
+          <li>JavaScript e Node.js</li><li>Express</li><li>React e Vite</li><li>Flask</li><li>HTML e CSS</li><li>Three.js</li><li>PostgreSQL</li><li>SQL e Oracle PL/SQL</li><li>SQLite</li><li>Supabase e Neon</li><li>pandas e openpyxl</li><li>Git e GitHub</li>
+        </ul>
       </div>
     </div>
-    <div class="pratica" id="pratica">
-      <h3>Na prática</h3>
-      <p class="sub">O que eu já fiz com as próprias mãos, em celulares e computadores.</p>
-      <ul class="feitos">
-        <li class="feito"><span class="fig alto"><img src="img/galaxy-a17.jpg" alt="Samsung Galaxy A17" loading="lazy" width="700" height="933"></span><div class="txt"><span class="onde">Celular</span><h4>Troca de tela: Galaxy A17</h4><p>Substituí a tela de um Samsung Galaxy A17.</p></div></li>
-        <li class="feito"><span class="fig alto"><img src="img/moto-g35.jpg" alt="Motorola Moto G35" loading="lazy" width="700" height="1244"></span><div class="txt"><span class="onde">Celular</span><h4>Tela e bateria: Moto G35</h4><p>No Moto G35 já fiz a troca de tela e a troca de bateria.</p></div></li>
-        <li class="feito"><span class="fig"><img src="img/ddr5.jpg" alt="Módulo de memória DDR5 de computador de mesa" loading="lazy" width="900" height="503"></span><div class="txt"><span class="onde">No trabalho</span><h4>Memória DDR5</h4><p>Instalei um módulo de memória DDR5 no computador do setor de marketing de uma empresa em que trabalhei.</p></div></li>
-        <li class="feito"><span class="fig"><svg viewBox="0 0 400 300" role="img" aria-label="Ilustração de uma placa de vídeo de dois processadores gráficos" xmlns="http://www.w3.org/2000/svg">
+  </div>
+</section>
+
+<!-- ================= CERTIFICAÇÕES ================= -->
+<section class="block" id="certificacoes" aria-labelledby="h-cert">
+  <div class="wrap">
+    <span class="eyebrow">Certificações</span>
+    <h2 id="h-cert">Cursos e selos, com link para verificar</h2>
+    <p class="sub">Tudo que tem comprovante público traz o link de verificação. Os cursos em andamento aparecem marcados.</p>
+
+    <div class="cert-resumo" aria-label="Resumo das certificações">
+      <div><b>22</b><span>cursos e selos</span></div>
+      <div><b>~310 h</b><span>de carga comprovada</span></div>
+      <div><b>18</b><span>com verificação online</span></div>
+      <div><b>2</b><span>em andamento</span></div>
+    </div>
+
+    <div class="cert-grupo">
+      <h3>Claude Academy <span class="org">· Anthropic</span></h3>
+      <p class="desc">Selos sobre o uso de agentes de IA no trabalho: do básico do Claude ao Claude Code e a equipes humano-agente.</p>
+      <ul class="certs">
+        <li class="cert ia"><b>Claude Code 101</b><span class="meta">selo · nov/2026</span><a class="ver" href="https://academy.claude.com/verify/77e216f63e445b1c06f6a3cab140e7e8">Verificar selo</a></li>
+        <li class="cert ia"><b>Building Effective Human-Agent Teams</b><span class="meta">selo · beta · nov/2026</span><a class="ver" href="https://academy.claude.com/verify/c5dc877282fe4ffddf5530543bd5eec4">Verificar selo</a></li>
+        <li class="cert ia"><b>AI Capabilities and Limitations</b><span class="meta">selo · nov/2026</span><a class="ver" href="https://academy.claude.com/verify/4d4f323cde219b454cb5f8ed3f1670fd">Verificar selo</a></li>
+        <li class="cert ia"><b>Introduction to Claude Cowork</b><span class="meta">selo · abr/2026</span><a class="ver" href="https://academy.claude.com/verify/a03a3f64ccfea2cf96b591f51bcc1deb">Verificar selo</a></li>
+        <li class="cert ia"><b>Claude 101</b><span class="meta">selo · abr/2026</span><a class="ver" href="https://academy.claude.com/verify/8498bf1b5de5461c7fa9faa72a332ba5">Verificar selo</a></li>
+        <li class="cert ia"><b>AI Fluency for Students</b><span class="meta">selo · abr/2026</span><a class="ver" href="https://academy.claude.com/verify/3a585c8a46ad212173fb99c7bb5e2a78">Verificar selo</a></li>
+      </ul>
+    </div>
+
+    <div class="cert-grupo">
+      <h3>IBM SkillsBuild <span class="org">· credenciais no Credly</span></h3>
+      <p class="desc">Duas trilhas completas de IA, cada uma com credencial digital, e um curso de fundamentos de desenvolvimento web.</p>
+      <ul class="certs">
+        <li class="cert ibm"><b>AI Fundamentals</b><span class="meta">credencial · 9h10 · abr/2026<br>Introduction to AI · The Intelligence Behind AI · Machine Learning · Neural Networks and Deep Learning · AI Forms and Functions</span><span class="sem">Credencial no Credly (link em breve)</span></li>
+        <li class="cert ibm"><b>AI Literacy</b><span class="meta">credencial · 4h45 · abr/2026<br>Exploring AI · Interacting with AI · Mastering the Art of Prompting</span><a class="ver" href="https://skills.yourlearning.ibm.com/credential/CREDLY-e440a1be-c35b-4604-b698-1b6d089acb11">Verificar credencial</a></li>
+        <li class="cert ibm"><b>Web Development Basics</b><span class="meta">curso · 1h40 · nov/2026</span><a class="ver" href="https://skills.yourlearning.ibm.com/certificate/share/e8fc88ff3dewogICJsZWFybmVyQ05VTSIgOiAiNzUzMTk3OVJFRyIsCiAgIm9iamVjdFR5cGUiIDogIkFDVElWSVRZIiwKICAib2JqZWN0SWQiIDogIkFMTS1DT1VSU0VfNDA1ODkzNyIKfQda1a044872-10">Ver certificado</a></li>
+      </ul>
+    </div>
+
+    <div class="cert-grupo">
+      <h3>IFRS <span class="org">· Instituto Federal do Rio Grande do Sul · 280 h</span></h3>
+      <p class="desc">Cursos de qualificação com certificado digital verificável no Moodle do IFRS.</p>
+      <ul class="certs">
+        <li class="cert ifrs"><b>Instalador e Reparador de Redes de Computadores</b><span class="meta">200 h · fev–mar/2026 · aproveitamento <em>86,56%</em></span><a class="ver" href="https://moodle.ifrs.edu.br/mod/simplecertificate/verify.php?code=69cc7c77-0d70-4bc2-b910-22ff0aa81308">Verificar certificado</a></li>
+        <li class="cert ifrs"><b>Automação de Sistemas</b><span class="meta">30 h · out–nov/2026 · aproveitamento <em>88,06%</em></span><a class="ver" href="https://moodle.ifrs.edu.br/mod/simplecertificate/verify.php?code=6af17ced-8eec-4733-9c00-b7400aa83d04">Verificar certificado</a></li>
+        <li class="cert ifrs"><b>Banco de Dados: Oracle PL/SQL</b><span class="meta">20 h · fev–abr/2026 · aproveitamento <em>96,67%</em></span><a class="ver" href="https://moodle.ifrs.edu.br/mod/simplecertificate/verify.php?code=69cd62d8-abd4-4ee5-9441-2a880aa80010">Verificar certificado</a></li>
+        <li class="cert ifrs"><b>JavaScript</b><span class="meta">30 h · jun–jul/2024 · aproveitamento <em>90,00%</em></span><a class="ver" href="https://moodle.ifrs.edu.br/mod/simplecertificate/verify.php?code=66a9c31f-ede0-4643-ba9d-00270ade0002">Verificar certificado</a></li>
+      </ul>
+    </div>
+
+    <div class="cert-grupo">
+      <h3>Microsoft Learn <span class="org">· conquistas</span></h3>
+      <ul class="certs">
+        <li class="cert ms"><b>Introdução ao desenvolvimento de agentes de IA no Azure</b><span class="meta">conquista · mar/2026</span><a class="ver" href="https://learn.microsoft.com/pt-br/users/henriquematosdasilvasousa-5208/achievements/print/wv97bj6n">Verificar</a></li>
+        <li class="cert ms"><b>Aproveitar ferramentas e recursos de IA para sua empresa</b><span class="meta">conquista · mar/2026</span><a class="ver" href="https://learn.microsoft.com/pt-br/users/henriquematosdasilvasousa-5208/achievements/print/j3pak6et">Verificar</a></li>
+        <li class="cert ms"><b>Criar relatórios interativos usando o Copilot para Power BI</b><span class="meta">conquista · out/2025</span><a class="ver" href="https://learn.microsoft.com/pt-br/users/henriquematosdasilvasousa-5208/achievements/print/wvrah2ln">Verificar</a></li>
+        <li class="cert ms"><b>Introdução à análise de ponta a ponta usando Microsoft Fabric</b><span class="meta">conquista · out/2025</span><a class="ver" href="https://learn.microsoft.com/pt-br/users/henriquematosdasilvasousa-5208/achievements/print/fqa8zzsx">Verificar</a></li>
+        <li class="cert ms"><b>Introdução ao GitHub</b><span class="meta">conquista · jan/2025</span><a class="ver" href="https://learn.microsoft.com/pt-br/users/henriquematosdasilvasousa-5208/achievements/print/n242r4rf">Verificar</a></li>
+      </ul>
+    </div>
+
+    <div class="cert-grupo">
+      <h3>Gestão, negócios e em andamento</h3>
+      <ul class="certs">
+        <li class="cert outro"><b>Fundamentos da Gestão e Liderança</b><span class="meta">FM2S Educação e Consultoria · 5 h · nov/2026</span><a class="ver" href="https://ead.fm2s.com.br/verify/aa890a52461973ffeb5ca089ba725ce3ba30a65e">Verificar certificado</a></li>
+        <li class="cert outro"><b>Acelerador Vendedores B2B</b><span class="meta">Grupo Acelerador · 9 h · mar/2026</span><span class="sem">Certificado em PDF, sob consulta</span></li>
+        <li class="cert outro"><b>Python 3 do básico ao avançado</b><span class="meta">Udemy · 141h30 · <em>em andamento</em> desde nov/2026</span><a class="ver" href="https://www.udemy.com/course/python-3-do-zero-ao-avancado/">Página do curso</a></li>
+        <li class="cert outro"><b>Python Essentials 1</b><span class="meta">Cisco Networking Academy · <em>em andamento</em> desde nov/2026</span><span class="sem">Selo no Credly ao concluir</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================= HARDWARE (detalhe) ================= -->
+<section class="block hw" id="hardware" aria-labelledby="h-hw">
+  <div class="wrap">
+    <span class="eyebrow">Também</span>
+    <h2 id="h-hw">Hardware e suporte</h2>
+    <p class="sub">Comecei pela base: monto e conserto computadores e celulares, cuido do ambiente Windows da equipe e fiz 200 horas de curso de redes no IFRS. Isso me ajuda a automatizar sabendo onde as coisas quebram.</p>
+
+    <details class="bancada-wrap">
+      <summary>Desmontar um computador e um celular, peça por peça <small>interativo</small></summary>
+      <div class="bancada">
+        <div class="bench" id="bench-pc">
+          <header>
+            <h4>Computador de mesa</h4>
+            <span class="dica">10 peças</span>
+            <button class="toggle" type="button" data-bench="bench-pc" aria-pressed="false">Desmontar</button>
+          </header>
+          <div class="stage">
+            <div class="dev pc">
+              <button class="part gabinete" data-k="gabinete" style="left:0;top:0;width:300px;height:440px;--dx:-40px;--dy:0px"><span class="shape"></span><span class="lbl">Gabinete</span></button>
+              <button class="part placa" data-k="placa" style="left:30px;top:40px;width:220px;height:300px;--dx:-30px;--dy:10px"><span class="shape"></span><span class="lbl">Placa-mãe</span></button>
+              <button class="part cpu" data-k="cpu" style="left:110px;top:95px;width:60px;height:60px;--dx:-10px;--dy:-130px"><span class="shape"></span><span class="lbl">Processador</span></button>
+              <button class="part cooler" data-k="cooler" style="left:96px;top:81px;width:88px;height:88px;--dx:60px;--dy:-190px"><span class="shape"></span><span class="lbl">Cooler</span></button>
+              <button class="part ram" data-k="ram" style="left:196px;top:70px;width:14px;height:120px;--dx:120px;--dy:-80px"><span class="shape"></span><span class="lbl">Memória RAM</span></button>
+              <button class="part ram" data-k="ram" style="left:216px;top:70px;width:14px;height:120px;--dx:140px;--dy:-80px"><span class="shape"></span></button>
+              <button class="part gpu" data-k="gpu" style="left:40px;top:225px;width:200px;height:56px;--dx:150px;--dy:40px"><span class="shape"></span><span class="lbl">Placa de vídeo</span></button>
+              <button class="part ssd" data-k="ssd" style="left:60px;top:190px;width:90px;height:22px;--dx:-150px;--dy:-30px"><span class="shape"></span><span class="lbl">SSD NVMe</span></button>
+              <button class="part hd" data-k="hd" style="left:30px;top:360px;width:110px;height:62px;--dx:-140px;--dy:80px"><span class="shape"></span><span class="lbl">Disco rígido</span></button>
+              <button class="part fonte" data-k="fonte" style="left:150px;top:355px;width:130px;height:72px;--dx:120px;--dy:110px"><span class="shape"></span><span class="lbl">Fonte</span></button>
+              <button class="part fan" data-k="fan" style="left:258px;top:50px;width:36px;height:36px;--dx:170px;--dy:-60px"><span class="shape"></span><span class="lbl">Ventoinhas</span></button>
+              <button class="part fan" data-k="fan" style="left:258px;top:130px;width:36px;height:36px;--dx:170px;--dy:-20px"><span class="shape"></span></button>
+            </div>
+          </div>
+          <div class="info" id="info-pc" aria-live="polite"><p class="vazio">Escolha uma peça para ler sobre ela.</p></div>
+        </div>
+
+        <div class="bench" id="bench-cel">
+          <header>
+            <h4>Celular</h4>
+            <span class="dica">7 peças</span>
+            <button class="toggle" type="button" data-bench="bench-cel" aria-pressed="false">Desmontar</button>
+          </header>
+          <div class="stage">
+            <div class="dev cel">
+              <button class="part tampa" data-k="tampa" style="left:0;top:0;width:200px;height:400px;--dx:150px;--dy:0px"><span class="shape"></span><span class="lbl">Tampa traseira</span></button>
+              <button class="part bateria" data-k="bateria" style="left:50px;top:140px;width:100px;height:170px;--dx:0px;--dy:110px"><span class="shape"></span><span class="lbl">Bateria</span></button>
+              <button class="part logica" data-k="logica" style="left:30px;top:30px;width:140px;height:95px;--dx:0px;--dy:-90px"><span class="shape"></span><span class="lbl">Placa lógica</span></button>
+              <button class="part camera" data-k="camera" style="left:148px;top:36px;width:28px;height:48px;--dx:110px;--dy:-120px"><span class="shape"></span><span class="lbl">Câmeras</span></button>
+              <button class="part falante" data-k="falante" style="left:40px;top:330px;width:60px;height:22px;--dx:-80px;--dy:120px"><span class="shape"></span><span class="lbl">Alto-falante</span></button>
+              <button class="part usb" data-k="usb" style="left:88px;top:385px;width:30px;height:10px;--dx:60px;--dy:160px"><span class="shape"></span><span class="lbl">Conector de carga</span></button>
+              <button class="part tela" data-k="tela" style="left:0;top:0;width:200px;height:400px;--dx:-150px;--dy:0px"><span class="shape"></span><span class="lbl">Tela</span></button>
+            </div>
+          </div>
+          <div class="info" id="info-cel" aria-live="polite"><p class="vazio">Escolha uma peça para ler sobre ela.</p></div>
+        </div>
+      </div>
+    </details>
+
+    <ul class="feitos" aria-label="Reparos e montagens que já fiz">
+      <li class="feito"><span class="fig alto"><img src="img/galaxy-a17.jpg" alt="Samsung Galaxy A17" loading="lazy" width="700" height="933"></span><div class="txt"><span class="onde">Celular</span><h4>Troca de tela: Galaxy A17</h4><p>Substituí a tela de um Samsung Galaxy A17.</p></div></li>
+      <li class="feito"><span class="fig alto"><img src="img/moto-g35.jpg" alt="Motorola Moto G35" loading="lazy" width="700" height="1244"></span><div class="txt"><span class="onde">Celular</span><h4>Tela e bateria: Moto G35</h4><p>Troca de tela e de bateria em um Motorola Moto G35.</p></div></li>
+      <li class="feito"><span class="fig"><img src="img/ddr5.jpg" alt="Módulo de memória DDR5 de computador de mesa" loading="lazy" width="900" height="503"></span><div class="txt"><span class="onde">Empresa anterior</span><h4>Memória DDR5</h4><p>Instalei um módulo DDR5 no computador do setor de marketing.</p></div></li>
+      <li class="feito"><span class="fig"><svg viewBox="0 0 400 300" role="img" aria-label="Ilustração de uma placa de vídeo com dois processadores gráficos" xmlns="http://www.w3.org/2000/svg">
   <rect width="400" height="300" fill="#0d1115"/>
   <rect x="34" y="92" width="14" height="120" rx="2" fill="#aeb6be"/>
   <rect x="38" y="104" width="6" height="22" fill="#262c33"/><rect x="38" y="134" width="6" height="22" fill="#262c33"/>
@@ -297,123 +920,91 @@ footer a{color:var(--ink-2)}
   <rect x="96" y="204" width="150" height="12" fill="#d9a94b"/>
   <g fill="#0d1115"><rect x="120" y="204" width="3" height="12"/><rect x="150" y="204" width="3" height="12"/><rect x="180" y="204" width="3" height="12"/><rect x="210" y="204" width="3" height="12"/></g>
   <rect x="318" y="88" width="20" height="12" fill="#262c33"/><rect x="342" y="88" width="16" height="12" fill="#262c33"/>
-</svg></span><div class="txt"><span class="onde">Meu computador</span><h4>Placa de vídeo ATI Radeon HD 3870 X2</h4><p>Montei meu próprio computador, com uma ATI Radeon HD 3870 X2 como placa de vídeo.</p></div></li>
-        <li class="feito"><span class="fig"><img src="img/ddr3.jpg" alt="Módulos de memória DDR3 de computador de mesa" loading="lazy" width="900" height="766"></span><div class="txt"><span class="onde">Meu computador</span><h4>15 GB de memória DDR3</h4><p>O computador que montei usa 15 GB de memória RAM DDR3.</p></div></li>
-        <li class="feito"><span class="fig"><img src="img/hd.jpg" alt="Disco rígido de 3,5 polegadas" loading="lazy" width="800" height="800"></span><div class="txt"><span class="onde">Meu computador</span><h4>Disco rígido de 850 GB</h4><p>O armazenamento do computador que montei é um disco rígido de 850 GB.</p></div></li>
-      </ul>
-      <p class="nota-img">As fotos são ilustrativas dos modelos, não dos meus aparelhos; a placa de vídeo é um desenho. Créditos no rodapé.</p>
+</svg></span><div class="txt"><span class="onde">Meu computador</span><h4>Placa de vídeo ATI Radeon HD 3870 X2</h4><p>Montei meu próprio computador, com essa placa de vídeo.</p></div></li>
+      <li class="feito"><span class="fig"><img src="img/ddr3.jpg" alt="Módulos de memória DDR3 de computador de mesa" loading="lazy" width="900" height="766"></span><div class="txt"><span class="onde">Meu computador</span><h4>15 GB de memória DDR3</h4><p>O computador que montei usa 15 GB de RAM DDR3.</p></div></li>
+      <li class="feito"><span class="fig"><img src="img/hd.jpg" alt="Disco rígido de 3,5 polegadas" loading="lazy" width="800" height="800"></span><div class="txt"><span class="onde">Meu computador</span><h4>Disco rígido de 850 GB</h4><p>O armazenamento do computador que montei.</p></div></li>
+    </ul>
+    <p class="nota-img">As fotos são ilustrativas dos modelos, não dos meus aparelhos; a placa de vídeo é um desenho.</p>
+    <details class="creditos-fotos">
+      <summary>Créditos das fotos</summary>
+      <p>Fotos do Wikimedia Commons, redimensionadas: <a href="https://commons.wikimedia.org/wiki/File:Samsung_Galaxy_A17_5G_2026.jpg">Galaxy A17</a>, de Captainmorlypogi1959 (<a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>); <a href="https://commons.wikimedia.org/wiki/File:Motorola_Moto_G35_5G.jpg">Moto G35</a>, de Savantup (<a href="https://creativecommons.org/publicdomain/zero/1.0/deed.en">CC0</a>); <a href="https://commons.wikimedia.org/wiki/File:SK_hynix_16GB_DDR5-5600_UDIMM_HMCG78AGBUA084N_BA.jpg">memória DDR5</a>, <a href="https://commons.wikimedia.org/wiki/File:Assorted_DDR3_desktop_memory_modules_(Crucial_Ballistix,_Crucial,_Lenovo_and_Ramaxel).jpg">memórias DDR3</a> e <a href="https://commons.wikimedia.org/wiki/File:Seagate_BarraCuda_Compute_2TB_3.5-inch_SATA_HDD_-_top_view.jpg">disco rígido</a>, de ITEagle Europe - Sebastiaan Broekhoven (<a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>).</p>
+    </details>
+  </div>
+</section>
+
+<!-- ================= CONTATO ================= -->
+<section class="block" id="contato" aria-labelledby="h-contato">
+  <div class="wrap contato">
+    <div>
+      <span class="eyebrow">Contato</span>
+      <h2 id="h-contato">Vamos conversar sobre automação?</h2>
+      <p class="sub" style="margin-bottom:0">Respondo por e-mail ou WhatsApp em até um dia útil. Moro em Jandira, na Grande São Paulo, e atendo projetos remotos.</p>
     </div>
+    <ul class="canais">
+      <!-- AJUSTE: confirme o e-mail. -->
+      <li><a href="mailto:matosh797@gmail.com">
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+        <div><b>E-mail</b><span>matosh797@gmail.com</span></div></a></li>
+      <!-- AJUSTE: confirme o número. -->
+      <li><a href="https://wa.me/5554991064896">
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>
+        <div><b>WhatsApp e telefone</b><span>(54) 99106-4896</span></div></a></li>
+      <li><a href="https://github.com/Henrique-Mat0s">
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 22v-3.5a3 3 0 0 0-.9-2.3c3-.3 6-1.5 6-6.5a5 5 0 0 0-1.4-3.5 4.7 4.7 0 0 0-.1-3.5s-1.1-.3-3.6 1.4a12.5 12.5 0 0 0-6.6 0C6.9 2.4 5.8 2.7 5.8 2.7a4.7 4.7 0 0 0-.1 3.5A5 5 0 0 0 4.3 9.7c0 5 3 6.2 6 6.5a3 3 0 0 0-.9 2.3V22"/><path d="M9 19c-4 1.5-4-2-6-2"/></svg>
+        <div><b>GitHub</b><span>github.com/Henrique-Mat0s</span></div></a></li>
+      <li><a href="curriculo-henrique-matos.pdf" download>
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h8"/></svg>
+        <div><b>Currículo</b><span>PDF · atualizado em nov/2026</span></div></a></li>
+    </ul>
   </div>
 </section>
 
-<section class="block" id="projetos">
-  <div class="wrap">
-    <h2>Projetos</h2>
-    <p class="sub">Sistemas que construí e mantive. Os que têm repositório público trazem o link para o código; os demais entram aqui conforme forem publicados. Projetos do trabalho atual são descritos sem código nem dados, por confidencialidade.</p>
-    <div id="lista-projetos"></div>
-    <noscript><p class="sub">Ative o JavaScript para ver a lista, ou veja os repositórios em <a href="https://github.com/Henrique-Mat0s">github.com/Henrique-Mat0s</a>.</p></noscript>
-  </div>
-</section>
-
-<section class="block" id="habilidades">
-  <div class="wrap">
-    <h2>Habilidades</h2>
-    <p class="sub">O que uso no trabalho hoje.</p>
-    <div class="cols">
-      <div>
-        <h3>Hardware e suporte</h3>
-        <ul class="tags">
-          <li>Montagem de PC</li><li>Instalação de memória RAM</li><li>Instalação de placa de vídeo</li><li>Instalação de disco rígido</li><li>Troca de tela de celular</li><li>Troca de bateria de celular</li><li>Ambiente Windows da equipe</li>
-        </ul>
-      </div>
-      <div>
-        <h3>Automação e código</h3>
-        <ul class="tags">
-          <li>Python</li><li>Playwright</li><li>JavaScript</li><li>Node.js</li><li>Express</li><li>React</li><li>HTML e CSS</li><li>Flask</li><li>Scripts .bat</li><li>PowerShell</li><li>Git e GitHub</li>
-        </ul>
-      </div>
-      <div>
-        <h3>Dados e ferramentas</h3>
-        <ul class="tags">
-          <li>SQL</li><li>PostgreSQL</li><li>SQLite</li><li>Neon</li><li>Supabase</li><li>Excel e openpyxl</li><li>Google Sheets</li><li>n8n</li><li>Chatwoot</li><li>Claude Code</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="block" id="contato">
-  <div class="wrap">
-    <h2>Contato</h2>
-    <p class="sub">O caminho mais rápido é o GitHub.</p>
-    <p><a href="https://github.com/Henrique-Mat0s">github.com/Henrique-Mat0s</a></p>
-    <!-- Para acrescentar: <p><a href="https://www.linkedin.com/in/...">LinkedIn</a></p> e <p><a href="mailto:...">e-mail</a></p> -->
-  </div>
-</section>
+</main>
 
 <footer>
-  <div class="wrap creditos">Fotos de hardware do Wikimedia Commons, redimensionadas: <a href="https://commons.wikimedia.org/wiki/File:Samsung_Galaxy_A17_5G_2026.jpg">Galaxy A17</a>, de Captainmorlypogi1959 (<a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>); <a href="https://commons.wikimedia.org/wiki/File:Motorola_Moto_G35_5G.jpg">Moto G35</a>, de Savantup (<a href="https://creativecommons.org/publicdomain/zero/1.0/deed.en">CC0</a>); <a href="https://commons.wikimedia.org/wiki/File:SK_hynix_16GB_DDR5-5600_UDIMM_HMCG78AGBUA084N_BA.jpg">memória DDR5</a>, de ITEagle Europe - Sebastiaan Broekhoven (<a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>); <a href="https://commons.wikimedia.org/wiki/File:Assorted_DDR3_desktop_memory_modules_(Crucial_Ballistix,_Crucial,_Lenovo_and_Ramaxel).jpg">memórias DDR3</a>, de ITEagle Europe - Sebastiaan Broekhoven (<a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>); <a href="https://commons.wikimedia.org/wiki/File:Seagate_BarraCuda_Compute_2TB_3.5-inch_SATA_HDD_-_top_view.jpg">disco rígido</a>, de ITEagle Europe - Sebastiaan Broekhoven (<a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>).</div>
   <div class="wrap">
     <span>Henrique Matos · 2026</span>
-    <span>Site feito à mão, hospedado no <a href="https://github.com/Henrique-Mat0s/Henrique-Mat0s.github.io">GitHub Pages</a>.</span>
+    <span>Feito com o Claude Code. <button class="ctl-fundo" type="button" id="ctl-fundo" aria-pressed="true">Animação do fundo: ligada</button></span>
   </div>
 </footer>
 
 <script>
 // ===== Projetos =====
-// Para publicar o link de um projeto, preencha "links" com um ou mais itens:
-//   links:[{rotulo:"Código", url:"https://github.com/Henrique-Mat0s/NOME"}, {rotulo:"Abrir demonstração", url:"https://..."}]
-// Com "links" vazio o projeto aparece como "em publicação". "privado:true" marca código que não será aberto.
-// Imagem do projeto (opcional): img:{src:"img/arquivo.png", alt:"o que a tela mostra"}
+// destaque:true coloca o projeto nos três cards do topo (use em exatamente três).
+// Para publicar o código: links:[{rotulo:"Código", url:"https://github.com/Henrique-Mat0s/NOME"}]
+// privado:true marca projeto de trabalho cujo código não será aberto.
+// ia:true marca projeto que usa IA (recebe a etiqueta "usa IA").
 const PROJETOS = [
-  {ano:"2026", tipo:"Sistema web", titulo:"Central RH: plataforma inteligente de recrutamento",
+  {ano:"2026", tipo:"Sistema web", destaque:true, ia:true, titulo:"Central RH: recrutamento com IA",
+   curto:"Um bot coleta currículos por e-mail e WhatsApp; a IA extrai experiência e competências e classifica os candidatos de cada vaga com nota, pontos fortes e lacunas.",
    resumo:"Centraliza o recrutamento do recebimento do currículo à lista ordenada por vaga. Um bot lê a caixa de e-mail por IMAP, filtra por palavras-chave e recolhe os anexos; os currículos também chegam por um grupo de WhatsApp ou por upload. A IA extrai escolaridade, experiências, área e competências, e classifica os candidatos de cada vaga com nota, pontos fortes e lacunas.",
-   pontos:["Fila que respeita o limite do plano gratuito da IA: um currículo por vez, nova tentativa automática e rodízio entre chaves.",
-           "Se a IA estiver fora do ar, o currículo fica guardado e é reprocessado depois; nada se perde.",
+   pontos:["Lê currículos em PDF e Word; o e-mail entra por IMAP e o WhatsApp é pareado por QR Code.",
+           "Fila que respeita o limite do plano gratuito da IA: um currículo por vez, nova tentativa automática, limite diário e rodízio entre chaves.",
+           "Se a IA estiver fora do ar, o currículo fica guardado como \"Aguardando IA\" e é reprocessado depois; nada se perde.",
            "Login por setor: o RH opera e a TI configura chaves, e-mail e WhatsApp pela própria tela.",
-           "Arquivos de currículo ficam atrás de rota autenticada, por serem dados pessoais."],
-   stack:"Node.js · Express · NeDB · IMAP · WhatsApp (Baileys) · Groq",
-   links:[]},
-  {ano:"2026", tipo:"Sistema web", titulo:"Central Logística: simulador 3D de cargas e cubagem",
-   resumo:"Calcula quantos volumes cabem em cada caminhão, em quantos caminhões o pedido sai e como a carga fica arrumada, com visualização em 3D. Considera as medidas e o peso de cada modelo de caminhão, o diâmetro e as dimensões de cada produto e o encaixe de um item dentro de outro.",
-   pontos:["Carga paletizada, a granel ou a melhor das duas, escolhida automaticamente.",
-           "Um validador independente confere a solução peça por peça antes de a tela mostrar o resultado como validado.",
-           "Monta a combinação de caminhões mais barata para o pedido.",
-           "Visor 3D com vistas de topo, frente e lateral e modo raio-x para ver os itens encaixados."],
-   stack:"Node.js · SQLite · Three.js · HTML · CSS · JavaScript",
-   img:{src:"img/proj-logistica.png", alt:"Simulação de um pedido em um caminhão truck, com a carga em 3D e o selo de validada peça por peça"},
-   links:[{rotulo:"Código", url:"https://github.com/Henrique-Mat0s/central-logistica"}]},
-  {ano:"2026", tipo:"Aplicação web", titulo:"Sistema do mercado: PDV e estoque",
-   resumo:"Ponto de venda para pequeno mercado em uma única página, sem instalação. Lê código de barras pela câmera do celular, controla o estoque e fecha vendas. Os produtos e as vendas ficam em uma planilha do Google, acessada por um Apps Script.",
-   pontos:["Começou como um cadastro e contagem de produtos (Estoque) e evoluiu para o ponto de venda completo (PDV).",
-           "Venda com desconto, troco e quatro formas de pagamento; histórico de vendas com recibo."],
-   stack:"HTML · CSS · JavaScript · Google Apps Script · Google Sheets · ZXing",
-   img:{src:"img/proj-mercado.png", alt:"Tela de venda do PDV, com busca de produto, pedido e formas de pagamento"},
-   links:[{rotulo:"Abrir o PDV", url:"https://henrique-mat0s.github.io/pdv-mercado/"},
-          {rotulo:"Código do PDV", url:"https://github.com/Henrique-Mat0s/pdv-mercado"},
-          {rotulo:"Código do Estoque", url:"https://github.com/Henrique-Mat0s/estoque-mercado"}]},
-  {ano:"2026", tipo:"Sistema web", titulo:"Sistema de bots e dashboards",
-   resumo:"Central de TI que reúne o catálogo de aplicações da empresa e o controle dos bots: quais estão rodando, sessões, registros de execução e gráficos de uso em um só painel.",
-   pontos:["Painéis de visão geral, ranking e análise por bot; a demonstração roda com dados de exemplo.",
-           "Front-end em React e servidor próprio para iniciar, parar e acompanhar os bots."],
-   stack:"React · Vite · Tailwind · Node.js · Express · Supabase · Recharts",
-   img:{src:"img/proj-bots.png", alt:"Painel de controle de bots com indicadores, funil de engajamento, alertas e ranking"},
-   links:[{rotulo:"Abrir demonstração", url:"https://henrique-mat0s.github.io/central-bots/"},
-          {rotulo:"Código", url:"https://github.com/Henrique-Mat0s/central-bots"}]},
-  {ano:"2026", tipo:"Sistema web", titulo:"Gerenciador de veículos: controle e segurança de frota",
-   resumo:"Controla a retirada e a devolução dos veículos da empresa. Na retirada, registra pela câmera a foto de quem está assumindo o veículo, criando um histórico de uso com evidência de identificação. Também guarda abastecimentos, trocas de óleo e revisões de cada veículo.",
-   pontos:["Roda em HTTPS dentro da rede interna, condição para o navegador liberar a câmera.",
-           "Fotos apagadas automaticamente depois de um prazo de retenção configurável.",
-           "Reescrita genérica do sistema original, sem dependências externas e com testes automatizados."],
-   stack:"Node.js · SQLite · HTML · CSS · JavaScript",
-   img:{src:"img/proj-veiculos.png", alt:"Painel do gestor com veículos disponíveis e em uso, manutenções em alerta e últimos movimentos"},
-   links:[{rotulo:"Código", url:"https://github.com/Henrique-Mat0s/gerenciador-veiculos"}]},
-  {ano:"2026", tipo:"Trabalho", privado:true, titulo:"Robôs de consulta em portais de bancos",
+           "Perfil comportamental (DISC) estimado pela IA a partir do currículo, marcado como estimativa, com nível de confiança e aviso de que não substitui o teste aplicado; o cálculo do DISC tem testes automatizados.",
+           "Arquivos de currículo ficam atrás de rota autenticada, por serem dados pessoais. Um sandbox com banco em memória e IA simulada permite conhecer o sistema sem chave."],
+   stack:"Node.js · Express · NeDB · imapflow · Baileys (WhatsApp) · pdf-parse e mammoth · Groq (API compatível com OpenAI)",
+   imgs:[{src:"img/rh-dashboard.jpg", alt:"Painel do RH com dados de demonstração: currículos no banco, analisados pela IA, vagas abertas, limite diário de leituras, gráficos de escolaridade e de setor, vagas em andamento e atividades recentes"},
+         {src:"img/rh-vagas.jpg", alt:"Tela Vagas e Triagem: formulário de nova vaga à esquerda e cards das vagas com setor, senioridade, habilidades desejadas e quantos candidatos a IA já avaliou"},
+         {src:"img/rh-disc.jpg", alt:"Bloco de perfil comportamental DISC estimado pela IA, com barras de dominância, influência, estabilidade e conformidade, selo de confiança média e aviso de que é uma estimativa"},
+         {src:"img/rh-login.jpg", alt:"Tela de login da Central RH com escolha do setor, RH ou TI, e senha"}],
+   links:[]},  // repositório privado por enquanto; quando abrir: {rotulo:"Código", url:"https://github.com/Henrique-Mat0s/central-rh"}
+  {ano:"2026", tipo:"Trabalho", destaque:true, privado:true, titulo:"Robôs de consulta em portais de bancos",
+   curto:"Lê um lote de CPFs em planilha, consulta cada um no portal do banco parceiro e devolve a planilha preenchida. Uma base atende vários bancos e retoma de onde parou.",
    resumo:"Automação que lê um lote de CPFs em planilha, consulta cada um no portal do banco parceiro e devolve uma planilha de resultado. Uma base única atende vários bancos.",
    pontos:["Retoma de onde parou se a janela for fechada; nada se perde.",
            "Controle de ritmo e de sessão para evitar bloqueio pelos portais.",
            "Operado pela equipe com dois cliques em arquivos .bat."],
    stack:"Python · Playwright · openpyxl · Chrome via DevTools Protocol · scripts .bat",
+   links:[]},
+  {ano:"2026", tipo:"Trabalho", destaque:true, privado:true, ia:true, titulo:"Segundo cérebro para agentes de IA",
+   curto:"Base de conhecimento em Obsidian e Git que dá contexto ao Claude Code e ao Hermes Agent: sistemas, regras de negócio e decisões com data. Um verificador bloqueia dados pessoais.",
+   resumo:"Documentação da área em Markdown, organizada no Obsidian e versionada com Git: contexto de cada sistema, regras de negócio, decisões com data e motivo, e instruções para os agentes de IA (Claude Code e Hermes Agent). Os agentes leem essa base antes de qualquer tarefa, então respondem dentro das regras da empresa.",
+   pontos:["Skills do Claude Code para registrar decisões e revisar regras sempre do mesmo jeito.",
+           "Um verificador automático impede que dados pessoais de clientes entrem no repositório.",
+           "Histórico de decisões com data, para saber por que cada regra existe."],
+   stack:"Markdown · Obsidian · Git · Claude Code · Hermes Agent",
    links:[]},
   {ano:"2026", tipo:"Trabalho", privado:true, titulo:"Bot de pós-venda por WhatsApp",
    resumo:"Depois que o cliente assina uma portabilidade, a proposta espera dias pelo retorno do banco. O bot lê a planilha da equipe uma vez por dia, envia as mensagens previstas, registra o que fez e marca o que precisa de uma pessoa.",
@@ -422,26 +1013,159 @@ const PROJETOS = [
            "Leitura somente de banco PostgreSQL e integração planejada com n8n."],
    stack:"Python · Flask · PostgreSQL · Google Sheets API · n8n",
    links:[]},
-  {ano:"2026", tipo:"Trabalho", privado:true, titulo:"Base de conhecimento técnica em Git",
-   resumo:"Documentação da área em Markdown versionada com Git: contexto de cada projeto, decisões com data, regras de segurança de dados e instruções para assistentes de IA. Um verificador automático impede que dados pessoais entrem no repositório.",
-   pontos:[],
-   stack:"Markdown · Git · Obsidian",
-   links:[]}
+  {ano:"2026", tipo:"Sistema web", titulo:"Central Logística: simulador 3D de cargas e cubagem",
+   resumo:"Calcula quantos volumes cabem em cada caminhão, em quantos caminhões o pedido sai e como a carga fica arrumada, com visualização em 3D. Considera as medidas e o peso de cada modelo de caminhão, o diâmetro e as dimensões de cada produto e o encaixe de um item dentro de outro.",
+   pontos:["Carga paletizada, a granel ou a melhor das duas, escolhida automaticamente; monta a combinação de caminhões mais barata para o pedido.",
+           "Motor de cálculo separado do banco e das telas. Um validador independente, que não usa nenhum código do motor, confere a solução peça por peça (limites, sobreposição, apoio, empilhamento e peso) antes de a tela mostrar o selo de validada.",
+           "A busca é limitada pelo relógio, não por número de tentativas: a primeira combinação sempre termina, então sempre há resposta.",
+           "Servidor sem dependências externas, só com módulos do próprio Node; o Three.js fica no projeto, e o sistema funciona sem internet.",
+           "91 testes com node:test, entre eles um que sorteia 300 pedidos e exige que toda solução passe no validador, e testes de tela num Chrome sem janela controlado pelo protocolo de depuração.",
+           "Visor 3D com vistas de topo, frente e lateral e modo raio-x para ver os itens encaixados."],
+   stack:"Node.js 22 (módulos nativos) · node:sqlite · Three.js · HTML · CSS · JavaScript · node:test",
+   imgs:[{src:"img/logistica-3d.jpg", alt:"Tela de simulação: caminhão Truck em 3D carregado com bobinas verdes e rosas; à direita, resultado validado peça por peça, 2 caminhões, 68% do volume do primeiro"},
+         {src:"img/logistica-3d-2.jpg", alt:"Segundo caminhão da mesma simulação, com barras de tubo, caixas e bobinas pequenas ocupando 8% do volume"},
+         {src:"img/logistica-produtos.jpg", alt:"Cadastro de produtos: código, nome, tipo (barra, rolo, caixa), medidas, peso, volume e regra de empilhamento"},
+         {src:"img/logistica-caminhoes.jpg", alt:"Cadastro de caminhões: VUC, 3/4, Toco, Truck e Carreta, com medidas internas, peso máximo e custo por viagem"},
+         {src:"img/logistica-historico.jpg", alt:"Histórico de simulações salvas, com caminhões usados, modo de carga, ocupação, custo e validação"}],
+   links:[{rotulo:"Código", url:"https://github.com/Henrique-Mat0s/central-logistica"}]},
+  {ano:"2026", tipo:"Aplicação web", titulo:"Sistema do mercado: PDV e estoque",
+   resumo:"Ponto de venda para pequeno mercado em uma única página, sem instalação. Lê código de barras pela câmera do celular, controla o estoque e fecha vendas. Os produtos e as vendas ficam em uma planilha do Google, acessada por um Apps Script.",
+   pontos:["Quatro formas de pagamento: dinheiro com troco, débito, crédito parcelado e PIX; integração opcional com maquininha.",
+           "Produtos e vendas ficam na planilha; só a configuração fica no navegador. Cada venda dá baixa no estoque e gera recibo.",
+           "Começou como um cadastro e contagem de produtos (Estoque) e evoluiu para o ponto de venda completo (PDV)."],
+   stack:"HTML · CSS · JavaScript · Google Apps Script · Google Sheets · ZXing",
+   imgs:[{src:"img/proj-mercado.png", alt:"Tela de venda do PDV, com busca de produto, pedido e formas de pagamento"},
+         {src:"img/mercado-estoque.jpg", alt:"Tela de estoque: total de produtos, valor em estoque, itens com estoque baixo e zerados, busca por produto e tabela com código de barras, quantidade ajustável, preço e status"},
+         {src:"img/mercado-vendas.jpg", alt:"Histórico de vendas do dia: número de transações, faturamento, ticket médio, filtro por período e forma de pagamento, e lista de vendas com itens e total"},
+         {src:"img/mercado-recibo.jpg", alt:"Venda concluída com o comprovante gerado: itens, total da nota, forma de pagamento e botões de imprimir e nova venda"},
+         {src:"img/mercado-config.jpg", alt:"Configurações do mercado: nome fantasia, razão social, endereço, telefone, CNPJ, operador e integração opcional com maquininha de pagamento"}],
+   links:[{rotulo:"Abrir o PDV", url:"https://henrique-mat0s.github.io/pdv-mercado/"},
+          {rotulo:"Abrir o Estoque", url:"https://henrique-mat0s.github.io/estoque-mercado/"},
+          {rotulo:"Código do PDV", url:"https://github.com/Henrique-Mat0s/pdv-mercado"},
+          {rotulo:"Código do Estoque", url:"https://github.com/Henrique-Mat0s/estoque-mercado"}]},
+  {ano:"2026", tipo:"Sistema web", titulo:"Sistema de bots e dashboards",
+   resumo:"Central de TI que reúne o catálogo de aplicações da empresa e o controle dos bots: quais estão rodando, sessões, registros de execução e gráficos de uso em um só painel.",
+   pontos:["Catálogo montado a partir de notas em Markdown: o servidor observa a pasta e a tela se atualiza sozinha por WebSocket.",
+           "Vault: as notas da documentação técnica (o segundo cérebro) sincronizadas e pesquisáveis dentro da própria central.",
+           "Aba Gerenciar inicia e para os bots pelo servidor, com registros ao vivo; painéis de visão geral, ranking e análise por bot.",
+           "Modo demonstração que roda só no navegador, com dados de exemplo, por isso publicável no GitHub Pages."],
+   stack:"React 19 · Vite · Tailwind CSS · Recharts · Express · WebSocket · Supabase",
+   imgs:[{src:"img/proj-bots.png", alt:"Controle de bots em modo demonstração: pessoas contatadas, taxas de entrega, visualização e resposta, funil de engajamento, alertas ativos e ranking dos bots"},
+         {src:"img/bots-aplicacoes.jpg", alt:"Catálogo de aplicações agrupado por categoria: automações, bots e dashboards, cada card com status, versão, stack, pendências e link do repositório"},
+         {src:"img/bots-dashboard.jpg", alt:"Dashboard da central: total de aplicações, tarefas pendentes e concluídas, stacks sem documentação e lista das aplicações com mais pendências"},
+         {src:"img/bots-vault.jpg", alt:"Vault: pasta de notas em Markdown sincronizadas, organizada em Inbox, Áreas, Projetos e Recursos, com busca"}],
+   links:[{rotulo:"Abrir a demonstração", url:"https://henrique-mat0s.github.io/central-bots/"},
+          {rotulo:"Código", url:"https://github.com/Henrique-Mat0s/central-bots"}]},
+  {ano:"2026", tipo:"Sistema web", titulo:"Gerenciador de veículos: controle e segurança de frota",
+   resumo:"Controla a retirada e a devolução dos veículos da empresa. Na retirada, registra pela câmera a foto de quem está assumindo o veículo, criando um histórico de uso com evidência de identificação. Também guarda abastecimentos, trocas de óleo e revisões de cada veículo.",
+   pontos:["Um veículo em uso não pode ser retirado de novo, e a regra vale na tela, no servidor e no banco (índice único parcial no SQLite).",
+           "A foto é evidência, não verificação: não há reconhecimento facial. Fotos apagadas automaticamente depois de um prazo configurável; só o gestor as vê.",
+           "Roda em HTTPS dentro da rede interna, condição para o navegador liberar a câmera pelo celular.",
+           "Frota com abastecimentos, consumo médio, custo por quilômetro e alertas de troca de óleo e revisão por quilometragem ou data; rota pelo OpenStreetMap.",
+           "Cada retirada, devolução e avaria gera um aviso, com envio por webhook opcional. Testes com node:test em banco em memória."],
+   stack:"Node.js 22 (módulos nativos) · node:sqlite · HTML · CSS · JavaScript · getUserMedia",
+   imgs:[{src:"img/veiculos-painel.jpg", alt:"Painel do gestor com dados fictícios: veículos disponíveis, em uso e em manutenção, manutenções em alerta e a tabela dos últimos movimentos com condutor, destino e quilometragem"},
+         {src:"img/veiculos-retirada.jpg", alt:"Formulário de retirada de veículo: veículo, nome de quem retira, destino, quilometragem de saída e área da câmera para a foto de identificação, com aviso de que a foto é apagada após 90 dias"},
+         {src:"img/veiculos-devolucao.jpg", alt:"Tela de devolução com os veículos em uso, quem está com cada um, saída, destino e link para ver o destino no OpenStreetMap"},
+         {src:"img/veiculos-frota.jpg", alt:"Frota: cards por veículo com quilometragem, consumo médio, custo por quilômetro e status da troca de óleo e da revisão"},
+         {src:"img/veiculos-avisos.jpg", alt:"Avisos: registro de cada retirada, devolução e avaria, com data, tipo e texto do aviso"}],
+   links:[{rotulo:"Código", url:"https://github.com/Henrique-Mat0s/gerenciador-veiculos"}]}
 ];
 
+const tagDe = p => p.privado ? '<span class="tag emp">trabalho · código privado</span>'
+                 : p.links.length ? '<span class="tag pub">código aberto</span>'
+                 : '<span class="tag prep">demonstração sob consulta</span>';
+const tagIA = p => p.ia ? ' <span class="tag ia">usa IA</span>' : '';
+const linksDe = p => p.links.length
+  ? '<p class="links">' + p.links.map(l => '<a href="' + l.url + '">' + l.rotulo + '</a>').join('') + '</p>' : '';
+const catsDe = p => {
+  const c = ['todos'];
+  if (p.ia) c.push('ia');
+  if (p.privado) c.push('trabalho');
+  if (p.links.some(l => /github\.com/.test(l.url))) c.push('aberto');
+  if (/web/i.test(p.tipo)) c.push('web');
+  return c.join(' ');
+};
+PROJETOS.forEach((p, i) => p.id = 'p' + (i + 1));
+
+// Destaques (cards)
+document.getElementById("destaques").innerHTML = PROJETOS.filter(p => p.destaque).map(p =>
+  '<li class="card" data-cats="' + catsDe(p) + '"><div class="topo"><span>' + p.ano + ' · ' + p.tipo + '</span>' + tagDe(p) + '</div>' +
+  '<h3>' + p.titulo + tagIA(p) + '</h3><p>' + (p.curto || p.resumo) + '</p>' +
+  '<div class="stack">' + p.stack + '</div>' + linksDe(p) + '</li>').join("");
+
+// Lista completa: cada projeto abre e recolhe
 document.getElementById("lista-projetos").innerHTML = PROJETOS.map(p => {
-  const tag = p.privado ? '<span class="tag emp">código privado</span>'
-            : p.links.length ? '<span class="tag pub">código aberto</span>'
-            : '<span class="tag prep">em publicação</span>';
   const pontos = p.pontos.length ? "<ul>" + p.pontos.map(t => "<li>" + t + "</li>").join("") + "</ul>" : "";
-  const links = p.links.length
-    ? '<p class="links">' + p.links.map(l => '<a href="' + l.url + '">' + l.rotulo + "</a>").join("") + "</p>" : "";
-  const shot = p.img ? '<span class="shot"><img src="' + p.img.src + '" alt="' + p.img.alt + '" loading="lazy"></span>' : "";
-  return '<article class="proj"><div class="meta"><b>' + p.ano + "</b>" + p.tipo + tag + "</div><div><h3>" + p.titulo +
-         "</h3><p>" + p.resumo + "</p>" + pontos + '<div class="stack">' + p.stack + "</div>" + links + shot + "</div></article>";
+  let shot = "";
+  if (p.imgs && p.imgs.length) {
+    shot = '<div class="galeria" data-id="' + p.id + '"><figure class="shot"><img src="' + p.imgs[0].src + '" alt="' + p.imgs[0].alt + '" loading="lazy" width="1200" height="813"><figcaption>' + p.imgs[0].alt + '</figcaption></figure>' +
+           (p.imgs.length < 2 ? '' : '<div class="thumbs" role="group" aria-label="Telas do projeto">' + p.imgs.map((im, i) =>
+             '<button type="button" aria-pressed="' + (i === 0) + '" data-i="' + i + '" aria-label="Tela ' + (i + 1) + ' de ' + p.imgs.length + '"><img src="' + im.src + '" alt="" loading="lazy" width="200" height="130"></button>').join('') + '</div>') + '</div>';
+  } else if (p.img) {
+    shot = '<span class="shot"><img src="' + p.img.src + '" alt="' + p.img.alt + '" loading="lazy" width="620" height="400"></span>';
+  }
+  const curto = p.curto || p.resumo.split('. ')[0] + '.';
+  return '<details class="proj" open data-cats="' + catsDe(p) + '" id="' + p.id + '">' +
+         '<summary><div class="meta"><b>' + p.ano + '</b>' + p.tipo + tagDe(p) + '</div>' +
+         '<div class="tit"><h3>' + p.titulo + tagIA(p) + '</h3><p class="curto">' + curto + '</p></div>' +
+         '<span class="chev" aria-hidden="true"></span></summary>' +
+         '<div class="corpo"><div class="meta"><b>' + p.ano + '</b>' + p.tipo + tagDe(p) + '</div><div><p>' + p.resumo + '</p>' + pontos + '<div class="stack">' + p.stack + '</div>' + linksDe(p) + shot + '</div></div>' +
+         '</details>';
 }).join("");
 
-// ===== Textos das peças. "oque" é a função da peça; "exp" (opcional) é a sua experiência real com ela. =====
+// Imagem que não carrega: mostra qual arquivo está faltando (ajuda a conferir a pasta img/)
+document.addEventListener('error', e => {
+  const img = e.target; if (!img || img.tagName !== 'IMG' || img.closest('.thumbs')) return;
+  const aviso = document.createElement('div'); aviso.className = 'img-falta';
+  aviso.textContent = 'Imagem não encontrada: ' + img.getAttribute('src') + '. Confira se o arquivo está na pasta img/ do site.';
+  img.replaceWith(aviso);
+}, true);
+
+// Galerias: a miniatura escolhida vira a imagem principal
+document.querySelectorAll('.galeria').forEach(g => {
+  const proj = PROJETOS.find(p => p.id === g.dataset.id); const main = g.querySelector('.shot img'); const cap = g.querySelector('figcaption');
+  g.querySelectorAll('.thumbs button').forEach(b => b.addEventListener('click', () => {
+    const im = proj.imgs[+b.dataset.i]; main.src = im.src; main.alt = im.alt; cap.textContent = im.alt;
+    g.querySelectorAll('.thumbs button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+  }));
+});
+
+// Filtros
+const chips = [...document.querySelectorAll('#filtros .chip')];
+const contagens = {};
+chips.forEach(ch => { const f = ch.dataset.f; contagens[f] = PROJETOS.filter(p => catsDe(p).split(' ').includes(f)).length;
+  const n = document.getElementById('n-' + f); if (n) n.textContent = contagens[f]; });
+function filtrar(f){
+  chips.forEach(ch => ch.setAttribute('aria-pressed', String(ch.dataset.f === f)));
+  let vis = 0;
+  document.querySelectorAll('[data-cats]').forEach(el => {
+    const ok = el.dataset.cats.split(' ').includes(f);
+    el.hidden = !ok; if (ok && el.matches('details')) vis++;
+  });
+  document.getElementById('vazio').hidden = vis > 0;
+  document.getElementById('contagem').textContent = vis + ' de ' + PROJETOS.length + ' projetos' + (f === 'todos' ? '' : ' · filtro: ' + chips.find(c => c.dataset.f === f).firstChild.textContent.trim());
+  try { localStorage.setItem('filtro-projetos', f); } catch (e) {}
+}
+chips.forEach(ch => ch.addEventListener('click', () => filtrar(ch.dataset.f)));
+let filtroInicial = 'todos';
+try { const g = localStorage.getItem('filtro-projetos'); if (g && contagens[g] !== undefined) filtroInicial = g; } catch (e) {}
+filtrar(filtroInicial);
+
+// Expandir / recolher todos os visíveis
+const alternar = document.getElementById('alternar');
+alternar.addEventListener('click', () => {
+  const abertos = [...document.querySelectorAll('details.proj:not([hidden])')];
+  const abrir = abertos.some(d => !d.open);
+  abertos.forEach(d => d.open = abrir);
+  alternar.textContent = abrir ? 'Recolher todos' : 'Expandir todos';
+});
+document.getElementById('lista-projetos').addEventListener('toggle', () => {
+  const abertos = [...document.querySelectorAll('details.proj:not([hidden])')];
+  alternar.textContent = abertos.every(d => !d.open) ? 'Expandir todos' : 'Recolher todos';
+}, true);
+
+// ===== Peças do hardware. "oque" é a função; "exp" (opcional) é a experiência real. =====
 const PECAS = {
   gabinete:{nome:"Gabinete",oque:"A caixa que segura e protege tudo. Define o fluxo de ar e quais tamanhos de placa-mãe e fonte cabem.",exp:"Montei meu próprio computador de mesa."},
   placa:{nome:"Placa-mãe",oque:"Conecta todas as peças. Nela vão o processador, as memórias, a placa de vídeo e os armazenamentos; o chipset e a BIOS moram aqui."},
@@ -465,12 +1189,11 @@ const PECAS = {
 function mostrar(bench, k){
   const info = document.getElementById(bench === "bench-pc" ? "info-pc" : "info-cel");
   const p = PECAS[k]; if(!p) return;
-  info.innerHTML = "<h4>"+p.nome+"</h4><p><b>O que faz.</b> "+p.oque+"</p>"+(p.exp ? "<p><b>Minha experiência.</b> "+p.exp+"</p>" : "");
+  info.innerHTML = "<h5>"+p.nome+"</h5><p><b>O que faz.</b> "+p.oque+"</p>"+(p.exp ? "<p><b>Minha experiência.</b> "+p.exp+"</p>" : "");
   document.querySelectorAll("#"+bench+" .part").forEach(b => b.classList.toggle("ativa", b.dataset.k === k));
 }
 
 const temMouse = window.matchMedia("(hover:hover) and (pointer:fine)").matches;
-
 document.querySelectorAll(".bench").forEach(bench => {
   const stage = bench.querySelector(".stage");
   const toggle = bench.querySelector(".toggle");
@@ -491,12 +1214,55 @@ document.querySelectorAll(".bench").forEach(bench => {
   });
 });
 
-// Se a foto não existir ainda, usa um fundo neutro no lugar.
+// Foto: quando foto.jpg existir, ela substitui o terminal do topo.
 (function(){
-  const img = new Image();
-  img.onerror = () => document.getElementById("foto").classList.add("sem-foto");
-  img.src = "foto.jpg";
+  const img = document.getElementById("foto");
+  const ok = () => document.getElementById("visual").classList.add("tem-foto");
+  if (img.complete && img.naturalWidth > 0) ok(); else img.addEventListener("load", ok);
 })();
+
+// ===== Fundo animado: rede de pontos que deriva devagar =====
+(function(){
+  const cv = document.getElementById('fundo'); if (!cv) return;
+  const ctx = cv.getContext('2d');
+  const btn = document.getElementById('ctl-fundo');
+  const reduz = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let ligado = !reduz;
+  try { const g = localStorage.getItem('fundo-animado'); if (g === '0') ligado = false; if (g === '1' && !reduz) ligado = true; } catch (e) {}
+  let w, h, dpr, pts = [], raf = 0, ultimo = 0;
+  const cores = ['127,179,232', '127,179,232', '127,179,232', '217,169,75', '227,156,255'];
+  function montar(){
+    w = innerWidth; h = innerHeight; dpr = Math.min(devicePixelRatio || 1, 1.5);
+    cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const n = Math.max(26, Math.min(70, Math.round(w * h / 26000)));
+    pts = Array.from({length: n}, () => ({ x: Math.random() * w, y: Math.random() * h,
+      vx: (Math.random() - .5) * .18, vy: (Math.random() - .5) * .18, r: 1 + Math.random() * 1.4, c: cores[Math.floor(Math.random() * cores.length)] }));
+  }
+  function quadro(t){
+    const dt = Math.min(40, t - ultimo || 16); ultimo = t;
+    ctx.clearRect(0, 0, w, h);
+    const lim = 150;
+    for (const p of pts) { p.x += p.vx * dt / 16; p.y += p.vy * dt / 16;
+      if (p.x < -10) p.x = w + 10; if (p.x > w + 10) p.x = -10; if (p.y < -10) p.y = h + 10; if (p.y > h + 10) p.y = -10; }
+    ctx.lineWidth = 1;
+    for (let i = 0; i < pts.length; i++) for (let j = i + 1; j < pts.length; j++) {
+      const a = pts[i], b = pts[j], dx = a.x - b.x, dy = a.y - b.y, d = Math.hypot(dx, dy);
+      if (d < lim) { ctx.strokeStyle = 'rgba(127,179,232,' + (0.16 * (1 - d / lim)).toFixed(3) + ')'; ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke(); }
+    }
+    for (const p of pts) { ctx.fillStyle = 'rgba(' + p.c + ',.55)'; ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill(); }
+    if (ligado && !document.hidden) raf = requestAnimationFrame(quadro);
+  }
+  function iniciar(){ cancelAnimationFrame(raf); ultimo = 0; if (ligado) raf = requestAnimationFrame(quadro); else { quadro(16); } }
+  function atualizarBotao(){ if (!btn) return; btn.setAttribute('aria-pressed', String(ligado)); btn.textContent = 'Animação do fundo: ' + (ligado ? 'ligada' : 'desligada'); }
+  montar(); atualizarBotao(); iniciar();
+  addEventListener('resize', () => { montar(); iniciar(); });
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) iniciar(); });
+  if (btn) btn.addEventListener('click', () => { ligado = !ligado; try { localStorage.setItem('fundo-animado', ligado ? '1' : '0'); } catch (e) {} atualizarBotao(); iniciar(); });
+})();
+
+// Borda do topo ao rolar
+const topo = document.getElementById("topo");
+addEventListener("scroll", () => topo.classList.toggle("scrolled", scrollY > 8), {passive:true});
 </script>
 </body>
 </html>
