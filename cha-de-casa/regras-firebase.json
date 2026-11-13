@@ -1,0 +1,11 @@
+{
+  "rules": {
+    "presentes": {
+      ".read": true,
+      "$item": {
+        ".write": "!data.exists() && newData.exists()",
+        ".validate": "newData.hasChildren(['item','nome','quando']) && newData.child('nome').isString() && newData.child('nome').val().length <= 60"
+      }
+    }
+  }
+}
