@@ -63,7 +63,7 @@
     <strong><span class="ic-inline" data-i="heart"></span>Nada aqui é obrigatório!</strong>
     O mais importante é a sua presença. A lista é só para quem quiser ajudar com alguma coisa e para ninguém repetir presente. Pode vir de mãos vazias, viu?
   </div>
-  <p class="sub">Se quiser dar algo, escolha abaixo, coloque seu nome e confirme pelo WhatsApp.</p>
+  <p class="sub">Se quiser dar algo, escolha abaixo, coloque seu nome e confirme pelo WhatsApp. O que já foi escolhido aparece escuro, para ninguém repetir.</p>
 
   <div class="legenda">
     <span><i style="background:#6a3d1c"></i>Disponível</span>
@@ -83,10 +83,20 @@
   <p class="rodape">Presente mesmo é você estar lá. Conto com você! <span class="ic-inline" data-i="house"></span></p>
 </div>
 
-<script>
+<script type="module">
   /* ===== CONFIGURAÇÃO =====
      WHATSAPP: número do Riq com DDI+DDD, só dígitos (ex.: 5561999998888). */
   const WHATSAPP = "5554991064896";
+
+  /* FIREBASE: cole aqui o firebaseConfig do seu projeto (console.firebase.google.com).
+     Enquanto estiver vazio, a página funciona, mas as escolhas não ficam marcadas para os outros. */
+  const FIREBASE = {
+    apiKey: "",
+    authDomain: "",
+    databaseURL: "",
+    projectId: "",
+    appId: "",
+  };
 
   // Para marcar como já prometido: troque L por P no item
   const P = true, L = false;
@@ -175,25 +185,38 @@
   const resumo = document.getElementById('resumo');
   const btn = document.getElementById('btn');
   const selecionados = new Set();
+  const cards = new Map();   // nome do item -> cartão na tela
+  const fixos = new Set();   // itens marcados como P no código
+  const chave = n => n.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
 
   for (const {nome:cat, icone, itens:lista} of categorias) {
     const h = document.createElement('h2'); h.className='cat'; h.innerHTML = ICONES[icone] + `<span>${cat}</span>`; grid.appendChild(h);
     const g = document.createElement('div'); g.className='grid'; grid.appendChild(g);
-    [...lista].sort((a,b)=>a[2]-b[2]).forEach(([nome,emoji,prometido])=>{
+    [...lista].sort((a,b)=>a[2]-b[2]).forEach(([nome,icone,prometido])=>{
       const d = document.createElement('div');
-      d.className = 'item' + (prometido ? ' prometido' : '');
-      d.innerHTML = `<span class="ic">${ICONES[emoji]}</span><span class="nome">${nome}</span><span class="tag">Já prometido</span>`;
-      if(!prometido){
-        d.onclick = ()=>{
-          selecionados.has(nome) ? selecionados.delete(nome) : selecionados.add(nome);
-          d.classList.toggle('sel'); atualizar();
-        };
-      }
-      g.appendChild(d);
+      d.className = 'item';
+      d.innerHTML = `<span class="ic">${ICONES[icone]}</span><span class="nome">${nome}</span><span class="tag">Já prometido</span>`;
+      d.onclick = ()=>{
+        if (d.classList.contains('prometido')) return;
+        selecionados.has(nome) ? selecionados.delete(nome) : selecionados.add(nome);
+        d.classList.toggle('sel'); atualizar();
+      };
+      g.appendChild(d); cards.set(nome, d);
+      if (prometido) { fixos.add(nome); marcarPrometido(nome); }
     });
   }
 
   document.querySelectorAll('[data-i]').forEach(e=>e.innerHTML=ICONES[e.dataset.i]);
+
+  function marcarPrometido(nome){
+    const d = cards.get(nome); if (!d) return;
+    d.classList.add('prometido'); d.classList.remove('sel');
+    selecionados.delete(nome);
+  }
+  function liberar(nome){
+    const d = cards.get(nome); if (!d || fixos.has(nome)) return;
+    d.classList.remove('prometido');
+  }
 
   function atualizar(){
     const lista = [...selecionados];
@@ -202,10 +225,60 @@
   }
   nomeEl.addEventListener('input', atualizar);
 
-  btn.onclick = ()=>{
-    const msg = `Oi Riq! Aqui é ${nomeEl.value.trim()} 😊\nPara o Chá de Casa (21/06) eu vou dar: ${[...selecionados].join(', ')} 🎁`;
-    window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`, '_blank');
+  // ===== SINCRONIZAÇÃO ENTRE CONVIDADOS (Firebase Realtime Database) =====
+  let db = null, fb = null;
+  async function ligarFirebase(){
+    if (!FIREBASE.databaseURL) return;
+    const [{initializeApp}, {getDatabase, ref, onValue, set, serverTimestamp}] = await Promise.all([
+      import('https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js'),
+      import('https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js'),
+    ]);
+    db = getDatabase(initializeApp(FIREBASE));
+    fb = {ref, set, serverTimestamp};
+    onValue(ref(db, 'presentes'), snap => {
+      const dados = snap.val() || {};
+      const noServidor = new Set(Object.values(dados).map(r => r.item));
+      for (const nome of cards.keys()) noServidor.has(nome) ? marcarPrometido(nome) : liberar(nome);
+      atualizar();
+    });
+  }
+  ligarFirebase().catch(e => console.warn('Sem sincronização:', e));
+
+  // Grava cada item escolhido. As regras do banco só deixam gravar se o item ainda estiver livre,
+  // então "tomados" são os que alguém pegou segundos antes.
+  async function registrar(nome, lista){
+    const feitos = [], tomados = [];
+    if (!db) return {feitos: lista, tomados};
+    for (const item of lista){
+      const grava = fb.set(fb.ref(db, 'presentes/' + chave(item)), {item, nome, quando: fb.serverTimestamp()});
+      const espera = new Promise(r => setTimeout(() => r('timeout'), 8000));
+      try { await Promise.race([grava, espera]); feitos.push(item); }
+      catch (e) { tomados.push(item); }
+    }
+    return {feitos, tomados};
+  }
+
+  btn.onclick = async ()=>{
+    const nome = nomeEl.value.trim();
+    const lista = [...selecionados];
+    if (!nome || !lista.length) return;
+    btn.disabled = true;
+    const texto = btn.textContent; btn.textContent = 'Registrando…';
+    const janela = window.open('', '_blank');   // aberta no clique para o celular não bloquear
+    try {
+      const {feitos, tomados} = await registrar(nome, lista);
+      tomados.forEach(marcarPrometido);
+      if (tomados.length) alert('Ops! Alguém acabou de escolher: ' + tomados.join(', ') + '. Esse(s) saiu(ram) da sua lista.');
+      if (!feitos.length) { if (janela) janela.close(); return; }
+      feitos.forEach(marcarPrometido);
+      const msg = `Oi Riq! Aqui é ${nome} 😊\nPara o Chá de Casa (21/06) eu vou dar: ${feitos.join(', ')} 🎁`;
+      const url = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
+      if (janela) janela.location = url; else location.href = url;
+    } finally {
+      btn.textContent = texto; atualizar();
+    }
   };
 </script>
+
 </body>
 </html>
