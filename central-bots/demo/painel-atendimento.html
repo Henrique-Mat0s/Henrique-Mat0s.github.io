@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Painel de atendimento (exemplo)</title>
+<style>
+  :root { --fundo:#f5f6f8; --sup:#ffffff; --texto:#1c2430; --sec:#5c6773; --borda:#dfe3e8; --dest:#2f62a0; }
+  * { box-sizing: border-box; }
+  body { margin:0; padding:16px; background:var(--fundo); color:var(--texto);
+         font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; }
+  h1 { font-size:18px; margin:0 0 2px; }
+  p.sub { margin:0 0 16px; font-size:12px; color:var(--sec); }
+  .grade { display:grid; grid-template-columns:repeat(auto-fit, minmax(110px, 1fr)); gap:12px; margin-bottom:12px; }
+  .cartao { background:var(--sup); border:1px solid var(--borda); border-radius:10px; padding:14px; }
+  .rotulo { font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:var(--sec); }
+  .valor { font-size:24px; font-weight:700; margin-top:4px; }
+  h2 { font-size:13px; margin:0 0 10px; }
+  svg { width:100%; height:auto; display:block; }
+  text { font-size:10px; fill:var(--sec); font-family:inherit; }
+</style>
+</head>
+<body>
+  <h1>Painel de atendimento</h1>
+  <p class="sub">Página estática de exemplo, com números fictícios</p>
+
+  <div class="grade">
+    <div class="cartao"><div class="rotulo">Conversas hoje</div><div class="valor">184</div></div>
+    <div class="cartao"><div class="rotulo">Primeira resposta</div><div class="valor">2 min</div></div>
+    <div class="cartao"><div class="rotulo">Resolvidas pelo bot</div><div class="valor">61%</div></div>
+    <div class="cartao"><div class="rotulo">Nota média</div><div class="valor">4,5</div></div>
+  </div>
+
+  <div class="cartao">
+    <h2>Conversas por hora</h2>
+    <svg viewBox="0 0 600 180" role="img" aria-label="Conversas por hora, das 8h às 18h">
+      <g stroke="#dfe3e8" stroke-width="1">
+        <line x1="30" y1="150" x2="590" y2="150" />
+        <line x1="30" y1="100" x2="590" y2="100" stroke-dasharray="3 3" />
+        <line x1="30" y1="50" x2="590" y2="50" stroke-dasharray="3 3" />
+      </g>
+      <text x="4" y="153">0</text><text x="4" y="103">15</text><text x="4" y="53">30</text>
+      <g fill="#2f62a0">
+        <rect x="45"  y="110" width="30" height="40"  rx="3" />
+        <rect x="95"  y="77"  width="30" height="73"  rx="3" />
+        <rect x="145" y="50"  width="30" height="100" rx="3" />
+        <rect x="195" y="43"  width="30" height="107" rx="3" />
+        <rect x="245" y="93"  width="30" height="57"  rx="3" />
+        <rect x="295" y="113" width="30" height="37"  rx="3" />
+        <rect x="345" y="70"  width="30" height="80"  rx="3" />
+        <rect x="395" y="57"  width="30" height="93"  rx="3" />
+        <rect x="445" y="63"  width="30" height="87"  rx="3" />
+        <rect x="495" y="90"  width="30" height="60"  rx="3" />
+        <rect x="545" y="120" width="30" height="30"  rx="3" />
+      </g>
+      <g text-anchor="middle">
+        <text x="60" y="166">8h</text><text x="110" y="166">9h</text><text x="160" y="166">10h</text>
+        <text x="210" y="166">11h</text><text x="260" y="166">12h</text><text x="310" y="166">13h</text>
+        <text x="360" y="166">14h</text><text x="410" y="166">15h</text><text x="460" y="166">16h</text>
+        <text x="510" y="166">17h</text><text x="560" y="166">18h</text>
+      </g>
+    </svg>
+  </div>
+</body>
+</html>

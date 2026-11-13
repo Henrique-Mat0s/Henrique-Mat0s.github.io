@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Painel de operação (exemplo)</title>
+<style>
+  :root { --fundo:#f5f6f8; --sup:#ffffff; --texto:#1c2430; --sec:#5c6773; --borda:#dfe3e8;
+          --ok:#2e7d57; --alerta:#b7791f; --erro:#b3403a; }
+  * { box-sizing: border-box; }
+  body { margin:0; padding:16px; background:var(--fundo); color:var(--texto);
+         font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; }
+  h1 { font-size:18px; margin:0 0 2px; }
+  p.sub { margin:0 0 16px; font-size:12px; color:var(--sec); }
+  .grade { display:grid; grid-template-columns:repeat(auto-fit, minmax(110px, 1fr)); gap:12px; margin-bottom:12px; }
+  .cartao { background:var(--sup); border:1px solid var(--borda); border-radius:10px; padding:14px; }
+  .rotulo { font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:var(--sec); }
+  .valor { font-size:24px; font-weight:700; margin-top:4px; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th { text-align:left; font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:var(--sec);
+       padding:6px 8px; border-bottom:1px solid var(--borda); }
+  td { padding:8px; border-bottom:1px solid #eceef2; }
+  td.n, th.n { text-align:right; font-variant-numeric: tabular-nums; }
+  .estado { font-size:11px; font-weight:600; }
+  .ok { color:var(--ok); } .alerta { color:var(--alerta); } .erro { color:var(--erro); }
+</style>
+</head>
+<body>
+  <h1>Painel de operação</h1>
+  <p class="sub">Página estática de exemplo, com números fictícios</p>
+
+  <div class="grade">
+    <div class="cartao"><div class="rotulo">Na fila</div><div class="valor">312</div></div>
+    <div class="cartao"><div class="rotulo">Enviados hoje</div><div class="valor">1.846</div></div>
+    <div class="cartao"><div class="rotulo">Falhas hoje</div><div class="valor">23</div></div>
+  </div>
+
+  <div class="cartao">
+    <table>
+      <thead>
+        <tr><th>Fila</th><th class="n">Pendentes</th><th class="n">Enviados</th><th class="n">Falhas</th><th>Estado</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Lembretes</td><td class="n">248</td><td class="n">1.290</td><td class="n">12</td><td class="estado ok">Normal</td></tr>
+        <tr><td>Avisos</td><td class="n">64</td><td class="n">340</td><td class="n">9</td><td class="estado alerta">Lenta</td></tr>
+        <tr><td>Pesquisas</td><td class="n">0</td><td class="n">216</td><td class="n">2</td><td class="estado ok">Normal</td></tr>
+        <tr><td>Retorno de ligações</td><td class="n">0</td><td class="n">0</td><td class="n">0</td><td class="estado erro">Parada</td></tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
